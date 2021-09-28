@@ -1,0 +1,11 @@
+section.customer_login {
+    margin: 100px auto;
+    width: 30%;
+}
+.loginusingotp{
+    display: none;
+}
+.valid-body li {
+    text-transform: uppercase;
+    color: red;
+}
