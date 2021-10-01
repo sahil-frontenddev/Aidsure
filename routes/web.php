@@ -28,7 +28,7 @@ Route::get('customer/dashboard', 'App\Http\Controllers\customers\DashboardContro
 // Admin
 Route::get('admin/login', 'App\Http\Controllers\admin\LoginController@index')->name('admin_login');
 
-// Users
+// Admin
 
 Route::get('admin/dashboard', 'App\Http\Controllers\admin\AdminController@dashboard')->name('admin_dashboard'); 
 Route::get('admin/users', 'App\Http\Controllers\admin\AdminController@index')->name('admin_users'); 
@@ -36,6 +36,11 @@ Route::get('admin/centers', 'App\Http\Controllers\admin\AdminController@centers'
 Route::get('admin/newcenters', 'App\Http\Controllers\admin\AdminController@newcenters')->name('admin_newcenters'); 
 Route::get('admin/hospitals', 'App\Http\Controllers\admin\AdminController@hospitals')->name('admin_hospitals'); 
 Route::get('admin/addhospitals', 'App\Http\Controllers\admin\AdminController@addhospitals')->name('admin_addhospitals'); 
+
+//Customer
+
+Route::get('customer/family', 'App\Http\Controllers\customers\DashboardController@customer_family')->name('customer_family'); 
+Route::get('customer/newfamily', 'App\Http\Controllers\customers\DashboardController@customer_newfamily')->name('customer_newfamily'); 
 
 
 // Route::get('/customer/login', function () {

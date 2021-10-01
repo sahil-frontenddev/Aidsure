@@ -52,10 +52,10 @@
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav side-nav">
                 <li>
-                    <a href="#" data-toggle="collapse" data-target="#submenu-1"><i class="fa fa-users"></i> Users <i class="fa fa-fw fa-angle-down pull-right"></i></a>
+                    <a href="#" data-toggle="collapse" data-target="#submenu-1"><i class="fa fa-users"></i> Family <i class="fa fa-fw fa-angle-down pull-right"></i></a>
                     <ul id="submenu-1" class="collapse">
-                        <li><a href="{{route('admin_users')}}"><i class="fa fa-angle-double-right"></i> All Families</a></li>
-                        <li><a href="#"><i class="fa fa-angle-double-right"></i> Add New Family</a></li>
+                        <li><a href="{{route('customer_family')}}"><i class="fa fa-angle-double-right"></i> All Families</a></li>
+                        <li><a href="{{route('customer_newfamily')}}"><i class="fa fa-angle-double-right"></i> Add New Family</a></li>
                     </ul>
                 </li>
                 <li>

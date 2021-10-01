@@ -25,6 +25,16 @@ class DashboardController extends Controller
         // return View('customers.dashboard');
     }
 
+    public function customer_family(){
+
+    }
+
+    public function customer_newfamily(Request $request){
+
+    	return view('customers.addfamily');
+    	
+    }
+
     
 }
  

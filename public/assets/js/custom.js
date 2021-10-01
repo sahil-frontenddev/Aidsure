@@ -8,8 +8,11 @@ $(".loginusingotp a").click(function(){
 	$(".loginusingotp").hide();
 })
 
-var apiendpoint = 'http://aidsure.live/api/'; 
-var siteurl = 'http://aidsure.live/hospital2/'; 
+// var apiendpoint = 'http://aidsure.live/api/'; 
+// var siteurl = 'http://aidsure.live/hospital2/'; 
+
+var apiendpoint = 'http://localhost/hospital2/api/'; 
+var siteurl = 'http://localhost/hospital2/'; 
 
 function storeData(data,url){
 	$.ajax({
@@ -197,4 +200,12 @@ $(".createhospital").click(function(){
           	
           })
 	
+})
+
+
+$(".addmore").click(function(){
+
+	var html = '<div class="col-md-12"> <div class="form-group col-md-4"><input type="number" name="name[]" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Name" min="10" max="10"> </div><div class="form-group col-md-4"><input type="text" name="adh[]" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Adhar Number"></div><div class="form-group col-md-4"><input type="text" name="sign[]" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Signature"></div></div>';
+	$(".multile").append(html);
+
 })
