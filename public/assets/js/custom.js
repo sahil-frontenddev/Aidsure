@@ -15,6 +15,7 @@ var apiendpoint = 'http://localhost/hospital2/api/';
 var siteurl = 'http://localhost/hospital2/'; 
 
 function storeData(data,url){
+
 	$.ajax({
             url: apiendpoint+url,
             type: "post",
@@ -26,7 +27,7 @@ function storeData(data,url){
           }).done(function(res) {
           	// console.log(res.token.plainTextToken);
           	if(res.status == 'success'){
-          		localStorage.setItem("token", res.token);
+          		localStorage.setItem("ff_token", res.token);
           		location.href = siteurl+'customer/dashboard';
           	}
           	else{
@@ -36,6 +37,14 @@ function storeData(data,url){
           	}
           })
 }
+
+$(".customerlogin").click(function(){
+
+	var data = $('form').serialize();
+	storeData(data,'customer/login')
+	
+})
+
 
 $(".customersignup").click(function(){
 	$('.valid-body').html('');
@@ -58,12 +67,6 @@ $(".customersignup").click(function(){
 		storeData(data,'customer/signup')
 	
 })
-$(".customerlogin").click(function(){
-
-	var data = $('form').serialize();
-	storeData(data,'customer/login')
-	
-})
 
 
 function loginadmin(data,url){
@@ -79,7 +82,7 @@ function loginadmin(data,url){
           }).done(function(res) {
           	// console.log(res.token.plainTextToken);
           	if(res.status == 'success'){
-          		localStorage.setItem("token", res.token);
+          		localStorage.setItem("ff_token", res.token);
           		location.href = siteurl+'admin/dashboard';
           	}
           	else{
@@ -147,7 +150,7 @@ $(".createcenter").click(function(){
             type: "post",
             headers: {
                         'Accept': 'application/json',
-                        'Authorization': 'Bearer '+localStorage.getItem('token'),
+                        'Authorization': 'Bearer '+localStorage.getItem('ff_token'),
             },
             data:data,
             async:false,
@@ -187,14 +190,14 @@ $(".createhospital").click(function(){
             type: "post",
             headers: {
                         'Accept': 'application/json',
-                        'Authorization': 'Bearer '+localStorage.getItem('token'),
+                        'Authorization': 'Bearer '+localStorage.getItem('ff_token'),
             },
             data:data,
             async:false,
           }).done(function(res) {
           	
           	if(res.status == 'success'){
-          		alert('Hospital created successfullly');
+          		alert('Family created successfullly');
           		location.href = siteurl+'admin/hospitals';
           	}
           	
@@ -205,7 +208,204 @@ $(".createhospital").click(function(){
 
 $(".addmore").click(function(){
 
-	var html = '<div class="col-md-12"> <div class="form-group col-md-4"><input type="number" name="name[]" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Name" min="10" max="10"> </div><div class="form-group col-md-4"><input type="text" name="adh[]" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Adhar Number"></div><div class="form-group col-md-4"><input type="text" name="sign[]" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Signature"></div></div>';
+	var numItems = $('.rowc').length;
+	numItems = numItems+1;
+	var html = '<div class="col-md-12 rowc"><div class="form-group col-md-4"><input type="text" name="member['+numItems+'][name]" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Name" min="10" max="10"></div><div class="form-group col-md-4"><input type="text" name="member['+numItems+'][adh]" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Adhar Number"></div><div class="form-group col-md-4"><input type="text" name="member['+numItems+'][sign]" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Signature"></div></div>';
 	$(".multile").append(html);
 
 })
+
+
+$(".createfamily").click(function(){
+
+		$('.valid-body').html('');
+	var vdata = $('form').serializeArray();
+	var html = '';
+	var val = [];
+	for (const key of  vdata){
+		if(key.value == "" && key.name != 'email'){
+			val.push(key.value);
+			html += '<li>'+key.name+' is requeired!</li>';
+		}
+		
+	}
+	if(val.length > 0){
+		$('.valid-body').html(html);
+		$('#validationModal').modal('show');
+		return false;
+	}
+
+	var data = $('form').serialize();
+
+	console.log(data);
+
+	$.ajax({
+            url: apiendpoint+'customer/createfamily',
+            type: "post",
+            headers: {
+                        'Accept': 'application/json',
+                        'Authorization': 'Bearer '+localStorage.getItem('ff_token'),
+            },
+            data:data,
+            async:false,
+          }).done(function(res) {
+          	
+          	if(res.status == 'success'){
+          		alert('Hospital created successfullly');
+          		location.href = siteurl+'customer/family';
+          	}
+          	
+          })
+	
+})
+
+$(".createorder").click(function(){
+
+		$('.valid-body').html('');
+	var vdata = $('form').serializeArray();
+	var html = '';
+	var val = [];
+	for (const key of  vdata){
+		if(key.value == "" && key.name != 'email'){
+			val.push(key.value);
+			html += '<li>'+key.name+' is requeired!</li>';
+		}
+		
+	}
+	if(val.length > 0){
+		$('.valid-body').html(html);
+		$('#validationModal').modal('show');
+		return false;
+	}
+
+	var data = $('form').serialize();
+
+	console.log(data);
+
+	$.ajax({
+            url: apiendpoint+'customer/createorder',
+            type: "post",
+            headers: {
+                        'Accept': 'application/json',
+                        'Authorization': 'Bearer '+localStorage.getItem('ff_token'),
+            },
+            processData: false,
+            data:data,
+            async:false,
+          }).done(function(res) {
+          	
+          	if(res.status == 'success'){
+          		alert('Order created successfullly');
+          		location.href = siteurl+'customer/orders';
+          	}
+          	
+          })
+	
+})
+
+
+$(".makeactive i").click(function(){
+	
+	var id = $(this).attr('data-id');
+	var status = $(this).attr('data-status');
+
+	var data = {id:id,status:status};
+
+	$.ajax({
+          url: apiendpoint+'admin/hospitalstatus/'+id+'/'+status,
+          type: "get",
+          headers: {
+                      'Accept': 'application/json',
+                      'Authorization': 'Bearer '+localStorage.getItem('ff_token'),
+          },
+          processData: false,
+          data:{},
+          async:false,
+        }).done(function(res) {
+        	
+        	if(res.status == 'success'){
+        		
+        		location.reload();
+        		
+        	}
+        	
+        })
+
+})
+
+$(".makeactiveCenter i").click(function(){
+	
+	var id = $(this).attr('data-id');
+	var status = $(this).attr('data-status');
+
+	var data = {id:id,status:status};
+
+	$.ajax({
+          url: apiendpoint+'admin/centerstatus/'+id+'/'+status,
+          type: "get",
+          headers: {
+                      'Accept': 'application/json',
+                      'Authorization': 'Bearer '+localStorage.getItem('ff_token'),
+          },
+          processData: false,
+          data:{},
+          async:false,
+        }).done(function(res) {
+        	
+        	if(res.status == 'success'){
+        		
+        		location.reload();
+        		
+        	}
+        	
+        })
+
+})
+
+											
+function readFile() {
+  
+  if (this.files && this.files[0]) {
+    
+    var FR= new FileReader();
+    
+    FR.addEventListener("load", function(e) {
+     
+       $(".attachimage").val(e.target.result)
+
+      var data = $('form').serialize();
+
+		console.log(data);
+
+      $.ajax({
+            url: apiendpoint+'uploadimage',
+            type: "post",
+            headers: {
+                        'Accept': 'application/json',
+                        'Authorization': 'Bearer '+localStorage.getItem('ff_token'),
+            },
+            processData: false,
+            data:data,
+            async:false,
+          }).done(function(res) {
+          	
+          	if(res.status == 'success'){
+          		
+          		$(".attachimage").val(res.image);
+          		
+          	}
+          	
+          })
+
+
+    }); 
+    
+    FR.readAsDataURL( this.files[0] );
+  }
+  
+}
+
+document.getElementById("inp").addEventListener("change", readFile);
+
+
+

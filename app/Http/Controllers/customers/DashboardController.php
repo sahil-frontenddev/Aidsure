@@ -8,8 +8,12 @@ use Illuminate\Http\Response;
 use Auth;
 use App\Passport\Passport;
 use App\Models\User;
+use App\Models\Family;
+use App\Models\Member;
+use App\Models\Order;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class DashboardController extends Controller
 {
@@ -27,6 +31,10 @@ class DashboardController extends Controller
 
     public function customer_family(){
 
+
+        $family = Family::with('getmembers')->get();
+
+        return view('customers.family',['family'=>$family]);
     }
 
     public function customer_newfamily(Request $request){
@@ -35,6 +43,77 @@ class DashboardController extends Controller
     	
     }
 
+    public function createfamily(Request $request){
+
+        $family = new Family();
+
+        $family->family_id = rand();
+        $family->rnf = $request->r_number;
+        $family->st_address = $request->st_address;
+        $family->city = $request->city;
+        $family->state = $request->state;
+        $family->address = $request->address;
+        $family->phone = $request->phone;
+
+        if($family->save()){
+            foreach($request->member as $item){
+                $member = new Member();
+
+                $member->family_id = $family->id;
+                $member->name = $item['name'];
+                $member->adhar = $item['adh'];
+                $member->signature = $item['sign'];
+                $member->save();
+            }
+        return (new Response(['status'=>'success','msg'=>'Success!'], '200'));
+        }
+        else{
+            return (new Response(['status'=>'error','msg'=>'Error!'], '200'));
+        }
+
+    }
+
+    public function customer_neworder (){
+        return view('customers.createorder');
+    }
+
+    public function customer_order(){
+        $family = Order::get();
+         return view('customers.orders',['family'=>$family]);
+    }
+
+    public function createorder(Request $request){
+
+        $order = new Order();
+
+        $order->tablets = $request->tablets;
+        $order->capsules = $request->capsules;
+        $order->syrup = $request->syrup;
+        $order->injection = $request->injection;
+        $order->sergical = $request->sergical;
+        $order->image = $request->attachimage;
+       
+        if($order->save()){
+        
+        return (new Response(['status'=>'success','msg'=>'Success!'], '200'));
+        }
+        else{
+            return (new Response(['status'=>'error','msg'=>'Error!'], '200'));
+        }
+
+    }
+
+    public function uploadimage(Request $request){
+
+            $imagename = uniqid().'.png';
+            $img = Image::make( $request->attachimage); 
+            $img->save(public_path().'/'.$imagename); 
+
+            return response()->json([
+                'status' => 'success',
+                'image'=>$imagename
+            ]);
+    }
     
 }
  

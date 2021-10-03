@@ -59,19 +59,13 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="#" data-toggle="collapse" data-target="#submenu-2"><i class="fa fa-fw fa-star"></i>  Centers <i class="fa fa-fw fa-angle-down pull-right"></i></a>
+                    <a href="#" data-toggle="collapse" data-target="#submenu-2"><i class="fa fa-fw fa-star"></i>  Orders <i class="fa fa-fw fa-angle-down pull-right"></i></a>
                     <ul id="submenu-2" class="collapse">
-                        <li><a href="{{route('admin_centers')}}"><i class="fa fa-angle-double-right"></i> All Centers</a></li>
-                        <li><a href="{{route('admin_newcenters')}}"><i class="fa fa-angle-double-right"></i> Add New Center</a></li>
+                        <li><a href="{{route('customer_order')}}"><i class="fa fa-angle-double-right"></i> All Orders</a></li>
+                        <li><a href="{{route('customer_neworder')}}"><i class="fa fa-angle-double-right"></i> Add New Order</a></li>
                     </ul>
                 </li>
-                <li>
-                    <a href="#" data-toggle="collapse" data-target="#submenu-3"><i class="fa fa-users"></i> Hospitals <i class="fa fa-fw fa-angle-down pull-right"></i></a>
-                 <ul id="submenu-3" class="collapse">
-                    <li><a href="{{route('admin_hospitals')}}"><i class="fa fa-angle-double-right"></i> All Hospitals</a></li>
-                    <li><a href="{{route('admin_addhospitals')}}"><i class="fa fa-angle-double-right"></i> Add New Hospital</a></li>
-                </ul>
-                </li>
+                
             </ul>
         </div>
         <!-- /.navbar-collapse -->

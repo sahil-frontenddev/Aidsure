@@ -72,6 +72,12 @@
                     <li><a href="{{route('admin_addhospitals')}}"><i class="fa fa-angle-double-right"></i> Add New Hospital</a></li>
                 </ul>
                 </li>
+                <li>
+                    <a href="#" data-toggle="collapse" data-target="#submenu-4"><i class="fa fa-users"></i> Orders <i class="fa fa-fw fa-angle-down pull-right"></i></a>
+                 <ul id="submenu-4" class="collapse">
+                    <li><a href="{{route('admin_orders')}}"><i class="fa fa-angle-double-right"></i> All Orders</a></li>
+                </ul>
+                </li>
             </ul>
         </div>
         <!-- /.navbar-collapse -->

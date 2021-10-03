@@ -30,10 +30,17 @@ Route::get('admin/add', 'App\Http\Controllers\customers\AdminController@users');
 
 Route::post('admin/addcenters', 'App\Http\Controllers\admin\AdminController@addcenters');
 Route::get('admin/deletecenters', 'App\Http\Controllers\admin\AdminController@deletecenters');
+Route::get('admin/hospitalstatus/{id}/{status}', 'App\Http\Controllers\admin\AdminController@hospitalstatus');
+Route::get('admin/centerstatus/{id}/{status}', 'App\Http\Controllers\admin\AdminController@centerstatus');
 
 // Hospitals 
 
 Route::post('admin/addhospital', 'App\Http\Controllers\admin\AdminController@addnewhospital');
+
+Route::post('customer/createfamily', 'App\Http\Controllers\customers\DashboardController@createfamily');
+Route::post('customer/createorder', 'App\Http\Controllers\customers\DashboardController@createorder');
+Route::post('uploadimage', 'App\Http\Controllers\customers\DashboardController@uploadimage');
+
 
 });
 

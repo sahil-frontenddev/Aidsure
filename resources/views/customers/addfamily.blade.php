@@ -10,7 +10,7 @@
              <div class="col-md-12"> 
               <div class="form-group col-md-12">
                 <label for="exampleInputEmail1">Registration Number Of Family</label>
-                <input type="text" name="r_number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Name">
+                <input type="text" name="r_number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Registration Number Of Family">
               </div> 
              
             </div>
@@ -33,28 +33,52 @@
             </div>
             <div class="multile">
 
-	            <div class="col-md-12"> 
+	            <div class="col-md-12 rowc"> 
 	              <div class="form-group col-md-4">
 	               
-	                <input type="number" name="name[]" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Name" min="10" max="10">
+	                <input type="text" name="member[0][name]" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Name" min="10" max="10">
 	              </div> 
 	              <div class="form-group col-md-4">
 	                
-	                <input type="text" name="adh[]" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Adhar Number">
+	                <input type="text" name="member[0][adh]" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Adhar Number">
 	              </div>
 	              <div class="form-group col-md-4">
 	                
-	                <input type="text" name="sign[]" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Signature">
+	                <input type="text" name="member[0][sign]" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Signature">
 	              </div>
 	            </div>
-	        </div>    
-            
-
-
-            </div> 
+               
+	        </div> 
+          <div class="col-md-12"> 
+              <div class="form-group col-md-6">
+                <label for="exampleInputEmail1">Phone Number</label>
+                <input type="number" name="phone" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Phone Numner" min="10" max="10">
+              </div> 
+              <div class="form-group col-md-6">
+                <label for="exampleInputEmail1">City</label>
+                <input type="text" name="city" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter City">
+              </div>
+            </div>
             <div class="col-md-12">
               <div class="form-group col-md-6">
-                <button type="button" class="btn btn-primary createcenter">Register</button>
+                <label for="exampleInputEmail1">State</label>
+                <input type="text" name="state" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter State">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="exampleInputEmail1">Street Address</label>
+                <input type="text" name="st_address" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Street Address">
+              </div>
+            </div>
+            <div class="col-md-12">
+              
+              <div class="form-group col-md-6">
+                <label for="exampleInputEmail1">Address</label>
+                <input type="text" name="address" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Address">
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="form-group col-md-6">
+                <button type="button" class="btn btn-primary createfamily">Register</button>
               </div>
             </div>  
           </form>

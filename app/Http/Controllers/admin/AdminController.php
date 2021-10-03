@@ -11,6 +11,7 @@ use Hash;
 use App\Models\User;
 use App\Models\Center;
 use App\Models\Hospital;
+use App\Models\Order;
 
 class AdminController extends Controller
 {
@@ -29,9 +30,18 @@ class AdminController extends Controller
     }
     public function index(){
 
-        $users = User::where('role','customer')->get();
+        $users = User::where('role','admin')->get();
 
-        return view('admin.users',['users'=>$users]);
+        if(Auth::check() && Auth::user()->role == "admin") {
+
+           return view('admin.users',['users'=>$users]);
+        }
+        else{
+
+            return View('admin.login');
+        }
+
+        
     }
 
     public function dashboard(){
@@ -47,7 +57,7 @@ class AdminController extends Controller
     }
     
     public function centers(){
-     $centers = Center::where('role','customer')->get();
+     $centers = User::where('role','customer')->get();
      if(Auth::check() && Auth::user()->role == "admin") {
 
            return view('admin.centers',['centers'=>$centers]);
@@ -74,7 +84,7 @@ class AdminController extends Controller
 
     public function addcenters(Request $request){
 
-        $user = new Center();
+        $user = new User();
         $user->name = $request->username;
         $user->email = $request->youremail;
         $user->city = $request->city;
@@ -136,6 +146,44 @@ class AdminController extends Controller
         else{
             return (new Response(['status'=>'error','msg'=>'Registration failed!'], '200'));
         }
+
+    }
+
+    public function orders(){
+        $family = Order::get();
+
+        if(Auth::check() && Auth::user()->role == "admin") {
+
+            return view('admin.orders',['family'=>$family]);
+        }
+        else{
+
+            return View('admin.login');
+        }
+         
+    }
+
+    public function hospitalstatus($id,$status){
+
+        $hospital = Hospital::find($id);
+
+        $hospital->status = $status;
+
+        $hospital->save();
+
+        return (new Response(['status'=>'success'], '200'));
+
+    }
+
+    public function centerstatus($id,$status){
+
+        $center = User::find($id);
+
+        $center->status = $status;
+
+        $center->save();
+
+        return (new Response(['status'=>'success'], '200'));
 
     }
 
