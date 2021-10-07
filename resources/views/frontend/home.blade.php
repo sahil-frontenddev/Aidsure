@@ -1,7 +1,19 @@
 @extends('layouts.frontend.app')
 
 @section('content')
+@php
+use App\Models\User;
+use App\Models\Hospital;
+use App\Models\Order;
+use App\Models\Laboratory;
+use App\Models\Family;
 
+$users = User::where('status','approve')->get();
+$hospital = Hospital::where('status','approve')->get();
+$family = Family::where('status','approve')->get();
+
+
+@endphp
   <!-- ======= Hero Section ======= -->
   <section id="hero">
     <div id="heroCarousel" class="carousel slide carousel-fade" data-ride="carousel">
@@ -155,7 +167,7 @@
           <div class="col-lg-4 col-md-6 d-md-flex align-items-md-stretch">
             <div class="count-box">
               <i class="icofont-doctor-alt"></i>
-              <span data-toggle="counter-up">85</span>
+              <span data-toggle="counter-up">{{count($hospital)}}</span>
               <p><strong>Hospitals</strong></p>
               <a href="#">Find out more &raquo;</a>
             </div>
@@ -164,7 +176,7 @@
           <div class="col-lg-4 col-md-6 d-md-flex align-items-md-stretch">
             <div class="count-box">
               <i class="icofont-patient-bed"></i>
-              <span data-toggle="counter-up">180</span>
+              <span data-toggle="counter-up">{{count($users)}}</span>
               <p><strong>Centers</strong> </p>
               <a href="#">Find out more &raquo;</a>
             </div>
@@ -173,7 +185,7 @@
           <div class="col-lg-4 col-md-6 d-md-flex align-items-md-stretch">
             <div class="count-box">
               <i class="icofont-users"></i>
-              <span data-toggle="counter-up">800</span>
+              <span data-toggle="counter-up">{{count($family)}}</span>
               <p><strong>Families</strong></p>
               <a href="#">Find out more &raquo;</a>
             </div>

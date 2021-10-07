@@ -7,16 +7,16 @@
           <section class="" >
           <form>
             <div class="loginusingemail">
-             <div class="col-md-12"> 
+            <!--  <div class="col-md-12"> 
               <div class="form-group col-md-12">
                 <label for="exampleInputEmail1">Registration Number Of Family</label>
                 <input type="text" name="r_number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Registration Number Of Family">
               </div> 
              
-            </div>
+            </div> -->
            <div class="col-md-12"> 
-	           	<h2 class="col-md-9">Add Multiple</h2>
-	           	<span class="addmore col-md-3">Add</span>
+	           	<h2 class="col-md-9">Add Multiple <i class="fa fa-plus addmore" aria-hidden="true"></i></h2>
+	           
            </div>
             <div class="col-md-12"> 
               <div class="form-group col-md-4">
@@ -36,15 +36,15 @@
 	            <div class="col-md-12 rowc"> 
 	              <div class="form-group col-md-4">
 	               
-	                <input type="text" name="member[0][name]" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Name" min="10" max="10">
+	                <input type="text" name="member[0][name]" class="form-control fname" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Name" min="10" max="10">
 	              </div> 
 	              <div class="form-group col-md-4">
 	                
-	                <input type="text" name="member[0][adh]" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Adhar Number">
+	                <input type="text" name="member[0][adh]" class="form-control adh" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Adhar Number">
 	              </div>
 	              <div class="form-group col-md-4">
 	                
-	                <input type="text" name="member[0][sign]" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Signature">
+	                <input type="text" name="member[0][sign]" class="form-control sign" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Signature">
 	              </div>
 	            </div>
                
@@ -57,6 +57,16 @@
               <div class="form-group col-md-6">
                 <label for="exampleInputEmail1">City</label>
                 <input type="text" name="city" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter City">
+              </div>
+            </div>
+            <div class="col-md-12"> 
+              <div class="form-group col-md-6">
+                <label for="exampleInputEmail1">Email</label>
+                <input type="text" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Email" min="10" max="10">
+              </div> 
+              <div class="form-group col-md-6">
+                <label for="exampleInputEmail1">Date</label>
+                <input type="date" name="date" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Date">
               </div>
             </div>
             <div class="col-md-12">
@@ -75,6 +85,10 @@
                 <label for="exampleInputEmail1">Address</label>
                 <input type="text" name="address" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Address">
               </div>
+              <div class="form-group col-md-6">
+                <label for="exampleInputEmail1">Country</label>
+                <input type="text" name="country" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Country">
+              </div>
             </div>
             <div class="col-md-12">
               <div class="form-group col-md-6">
@@ -82,7 +96,7 @@
               </div>
             </div>  
           </form>
-      </section>
+      </section> 
       <div class="modal fade" id="validationModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -103,6 +117,13 @@
       </div>
     </div>
   </div>
+
+  <style type="text/css">
+    i.fa.fa-plus.addmore{
+      cursor: pointer;
+      color: red;
+    }
+  </style>
             <!-- /.row -->
 @endsection            
         

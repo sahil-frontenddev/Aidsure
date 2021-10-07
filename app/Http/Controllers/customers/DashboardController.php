@@ -30,17 +30,30 @@ class DashboardController extends Controller
     }
 
     public function customer_family(){
-
-
         $family = Family::with('getmembers')->get();
 
-        return view('customers.family',['family'=>$family]);
+        if(Auth::check() && Auth::user()->role == "customer") {
+
+             return view('customers.family',['family'=>$family]);
+        }
+        else{
+
+            return View('customers.login');
+        }
+        
     }
 
     public function customer_newfamily(Request $request){
+        
 
-    	return view('customers.addfamily');
-    	
+        if(Auth::check() && Auth::user()->role == "customer") {
+
+             return view('customers.addfamily');
+        }
+        else{
+
+            return View('customers.login');
+        }	
     }
 
     public function createfamily(Request $request){
@@ -48,12 +61,15 @@ class DashboardController extends Controller
         $family = new Family();
 
         $family->family_id = rand();
-        $family->rnf = $request->r_number;
+        // $family->rnf = $request->r_number;
         $family->st_address = $request->st_address;
         $family->city = $request->city;
         $family->state = $request->state;
         $family->address = $request->address;
         $family->phone = $request->phone;
+        $family->email = $request->email;
+        $family->country = $request->country;
+        $family->date = $request->date;
 
         if($family->save()){
             foreach($request->member as $item){
@@ -74,12 +90,29 @@ class DashboardController extends Controller
     }
 
     public function customer_neworder (){
-        return view('customers.createorder');
+        if(Auth::check() && Auth::user()->role == "customer") {
+
+             return view('customers.createorder');
+        }
+        else{
+
+            return View('customers.login');
+        }
+        
     }
 
     public function customer_order(){
         $family = Order::get();
-         return view('customers.orders',['family'=>$family]);
+
+        if(Auth::check() && Auth::user()->role == "customer") {
+
+             return view('customers.orders',['family'=>$family]);
+        }
+        else{
+
+            return View('customers.login');
+        }
+         
     }
 
     public function createorder(Request $request){

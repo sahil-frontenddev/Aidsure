@@ -46,6 +46,7 @@ class SignupController extends Controller
         }
         $user = new User();
         $user->name = $request->username;
+        $user->unique_number = rand();
         $user->email = $request->youremail;
         $user->city = $request->city;
         $user->state = $request->state;

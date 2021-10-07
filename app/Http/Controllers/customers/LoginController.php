@@ -46,11 +46,17 @@ class LoginController extends Controller
         $useremail = $request->useremail;
         $userpass = $request->userpassword;
         
-        if (Auth::attempt(['email' => $useremail, 'password' => $userpass])) {
-            $token = Auth::user()->createToken('my token');
-            return (new Response(['status'=>'success','token'=>$token], '200'));
-        }
-        else{
+        $login_credentials=[
+            'email'=>$request->useremail,
+            'password'=>$request->userpassword,
+        ];
+        if(auth()->attempt($login_credentials)){
+            //generate the token for the user
+            $user = Auth::user();
+            $user_login_token = $user->createToken('MyApp')->accessToken;
+            return (new Response(['status'=>'success','token'=>$user_login_token], '200'));
+           } 
+           else{
             return (new Response(['status'=>'error','msg'=>'Wrong Credentials!'], '200'));
         }
        

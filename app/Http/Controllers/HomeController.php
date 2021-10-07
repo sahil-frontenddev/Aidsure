@@ -4,6 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Models\User;
+use App\Models\Hospital;
+use App\Models\Order;
+use App\Models\Laboratory;
+use App\Models\Family;
+
 class HomeController extends Controller
 {
     /**
@@ -23,6 +29,12 @@ class HomeController extends Controller
      */
     public function index()
     {
+        
         return view('frontend.home');
+    }
+    public function hospital()
+    {
+        
+        return view('frontend.hospital');
     }
 }

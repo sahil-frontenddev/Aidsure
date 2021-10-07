@@ -8,7 +8,6 @@
                   <thead>
                     <tr>
                       <th scope="col">#</th>
-                      <th scope="col">Family Id</th>
                       <th scope="col">Family Registration Number</th>
                       <th scope="col">Phone Number</th>
                       <th scope="col">Members</th>
@@ -23,7 +22,6 @@
                     <tr>
                       <th scope="row">{{$item->id}}</th>
                       <td>{{$item->family_id}}</td>
-                      <td>{{$item->rnf}}</td>
                       <td>{{$item->phone}}</td>
                       <td>{{count($item->getmembers)}}</td>
                       <td>{{$item->status}}</td>

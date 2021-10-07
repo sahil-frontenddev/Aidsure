@@ -46,14 +46,7 @@ class LoginController extends Controller
            else{
             return (new Response(['status'=>'error','msg'=>'Wrong Credentials!'], '200'));
         }
-        // if (Auth::attempt(['email' => $useremail, 'password' => $userpass])) {
-        //     $tokenobj = Auth::user()->createToken('my token');
-        //     $token = $tokenobj->accessToken;
-        //     return (new Response(['status'=>'success','token'=>$tokenobj], '200'));
-        // }
-        // else{
-        //     return (new Response(['status'=>'error','msg'=>'Wrong Credentials!'], '200'));
-        // }
+       
        
     }
 

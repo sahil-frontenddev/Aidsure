@@ -2,7 +2,7 @@
 @section('content')
             <div class="row" id="main" >
                 <div class="col-sm-12 col-md-12 well" id="content">
-                    <h1>All Centers</h1>
+                    <h1>All Laboratory</h1>
                 </div>
                 <table class="table" id="usertable">
                   <thead>
@@ -23,7 +23,7 @@
                       <td>{{$item->email}}</td>
                       <td>{{$item->phone}}</td>
                       <td>{{$item->status}}</td>
-                      <td class="makeactiveCenter">
+                      <td class="makeactivelaboratory">
                         @if($item->status == 'approve')
                          <i class="fa fa-star active" data-id="{{$item->id}}" data-status="not-approve"/>
                         @else
@@ -35,8 +35,7 @@
                   </tbody>
                 </table>
             </div>
-
-
+            <!-- /.row -->
             <style type="text/css">
               i.fa.fa-star.active {
     color: green;
@@ -45,6 +44,5 @@
   cursor: pointer;
 }
             </style>
-            <!-- /.row -->
 @endsection            
         

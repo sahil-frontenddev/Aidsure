@@ -52,10 +52,10 @@
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav side-nav">
                 <li>
-                    <a href="#" data-toggle="collapse" data-target="#submenu-1"><i class="fa fa-users"></i> Users <i class="fa fa-fw fa-angle-down pull-right"></i></a>
+                    <a href="#" data-toggle="collapse" data-target="#submenu-1"><i class="fa fa-users"></i> Admin Users <i class="fa fa-fw fa-angle-down pull-right"></i></a>
                     <ul id="submenu-1" class="collapse">
                         <li><a href="{{route('admin_users')}}"><i class="fa fa-angle-double-right"></i> All Users</a></li>
-                        <li><a href="#"><i class="fa fa-angle-double-right"></i> Add New user</a></li>
+                        <!-- <li><a href="#"><i class="fa fa-angle-double-right"></i> Add New user</a></li> -->
                     </ul>
                 </li>
                 <li>
@@ -76,6 +76,20 @@
                     <a href="#" data-toggle="collapse" data-target="#submenu-4"><i class="fa fa-users"></i> Orders <i class="fa fa-fw fa-angle-down pull-right"></i></a>
                  <ul id="submenu-4" class="collapse">
                     <li><a href="{{route('admin_orders')}}"><i class="fa fa-angle-double-right"></i> All Orders</a></li>
+                </ul>
+                </li>
+                <li>
+                    <a href="#" data-toggle="collapse" data-target="#submenu-5"><i class="fa fa-users"></i> Laboratory <i class="fa fa-fw fa-angle-down pull-right"></i></a>
+                 <ul id="submenu-5" class="collapse">
+                    <li><a href="{{route('admin_laboratory')}}"><i class="fa fa-angle-double-right"></i> All Laboratory</a></li>
+                    <li><a href="{{route('admin_addlaboratory')}}"><i class="fa fa-angle-double-right"></i> Add New Laboratory</a></li>
+                </ul>
+                </li>
+                <li>
+                    <a href="#" data-toggle="collapse" data-target="#submenu-6"><i class="fa fa-users"></i> Medical Stores <i class="fa fa-fw fa-angle-down pull-right"></i></a>
+                 <ul id="submenu-6" class="collapse">
+                    <li><a href="{{route('admin_medicalstores')}}"><i class="fa fa-angle-double-right"></i> All Medical Stores</a></li>
+                    <li><a href="{{route('admin_addmedicalstore')}}"><i class="fa fa-angle-double-right"></i> Add New Medical Store</a></li>
                 </ul>
                 </li>
             </ul>

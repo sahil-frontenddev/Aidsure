@@ -12,6 +12,8 @@ use App\Models\User;
 use App\Models\Center;
 use App\Models\Hospital;
 use App\Models\Order;
+use App\Models\Laboratory;
+use App\Models\Medicalstore;
 
 class AdminController extends Controller
 {
@@ -186,5 +188,136 @@ class AdminController extends Controller
         return (new Response(['status'=>'success'], '200'));
 
     }
+
+    public function orderstatus($id,$status){
+
+        $order = Order::find($id);
+
+        $order->status = $status;
+
+        $order->save();
+
+        return (new Response(['status'=>'success'], '200'));
+
+    }
+
+    public function laboratorystatus($id,$status){
+
+        $order = Laboratory::find($id);
+
+        $order->status = $status;
+
+        $order->save();
+
+        return (new Response(['status'=>'success'], '200'));
+
+    }
+    public function medicalstorestatus($id,$status){
+
+        $order = Medicalstore::find($id);
+
+        $order->status = $status;
+
+        $order->save();
+
+        return (new Response(['status'=>'success'], '200'));
+
+    }
+
+
+    public function laboratory(){
+        $centers = Laboratory::get();
+        if(Auth::check() && Auth::user()->role == "admin") {
+
+             return view('admin.laboratory',['centers'=>$centers]);
+        }
+        else{
+
+            return View('admin.login');
+        }
+ 
+    }
+    public function addlaboratory(){
+        if(Auth::check() && Auth::user()->role == "admin") {
+
+            return View('admin.newlaboratory');
+        }
+        else{
+
+            return View('admin.login');
+        }
+
+    }
+
+    public function addnewlaboratory(Request $request){
+
+        $user = new Laboratory();
+        $user->name = $request->username;
+        $user->email = $request->youremail;
+        $user->city = $request->city;
+        $user->state = $request->state;
+        $user->phone = $request->phone;
+        $user->address = $request->address;
+        $user->speciality = $request->speciality;
+        $user->doctor_name = $request->doctor_name;
+
+        if($user->save()){
+           
+            return (new Response(['status'=>'success'], '200'));
+        }
+        else{
+            return (new Response(['status'=>'error','msg'=>'Registration failed!'], '200'));
+        }
+
+    }
+
+
+    public function medicalstores(){
+        $centers = Medicalstore::get();
+        if(Auth::check() && Auth::user()->role == "admin") {
+
+             return view('admin.medicalstores',['centers'=>$centers]);
+        }
+        else{
+
+            return View('admin.login');
+        }
+        // return view('admin.hospitals',['centers'=>$centers]);
+    }
+    public function addmedicalstore(){
+        if(Auth::check() && Auth::user()->role == "admin") {
+
+            return View('admin.newmedicalstore');
+        }
+        else{
+
+            return View('admin.login');
+        }
+        // return view('admin.newhospital');
+    }
+
+    public function addnewmedicalstore(Request $request){
+
+        $user = new Medicalstore();
+        $user->name = $request->username;
+        $user->email = $request->youremail;
+        $user->city = $request->city;
+        $user->state = $request->state;
+        $user->phone = $request->phone;
+        $user->address = $request->address;
+        $user->speciality = $request->speciality;
+        $user->doctor_name = $request->doctor_name;
+
+        if($user->save()){
+           
+            return (new Response(['status'=>'success'], '200'));
+        }
+        else{
+            return (new Response(['status'=>'error','msg'=>'Registration failed!'], '200'));
+        }
+
+    }
+
+
 
 }

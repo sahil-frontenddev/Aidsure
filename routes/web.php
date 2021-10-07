@@ -36,7 +36,11 @@ Route::get('admin/centers', 'App\Http\Controllers\admin\AdminController@centers'
 Route::get('admin/newcenters', 'App\Http\Controllers\admin\AdminController@newcenters')->name('admin_newcenters'); 
 Route::get('admin/hospitals', 'App\Http\Controllers\admin\AdminController@hospitals')->name('admin_hospitals'); 
 Route::get('admin/addhospitals', 'App\Http\Controllers\admin\AdminController@addhospitals')->name('admin_addhospitals'); 
-Route::get('admin/orders', 'App\Http\Controllers\admin\AdminController@orders')->name('admin_orders'); 
+Route::get('admin/orders', 'App\Http\Controllers\admin\AdminController@orders')->name('admin_orders');
+Route::get('admin/laboratory', 'App\Http\Controllers\admin\AdminController@laboratory')->name('admin_laboratory'); 
+Route::get('admin/addlaboratory', 'App\Http\Controllers\admin\AdminController@addlaboratory')->name('admin_addlaboratory'); 
+Route::get('admin/medicalstores', 'App\Http\Controllers\admin\AdminController@medicalstores')->name('admin_medicalstores'); 
+Route::get('admin/addmedicalstore', 'App\Http\Controllers\admin\AdminController@addmedicalstore')->name('admin_addmedicalstore'); 
 
 //Customer
 
