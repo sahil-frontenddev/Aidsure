@@ -12,6 +12,7 @@
                       <th scope="col">Phone Number</th>
                       <th scope="col">Members</th>
                       <th scope="col">Status</th>
+                      <th scope="col">Action</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -25,11 +26,12 @@
                       <td>{{$item->phone}}</td>
                       <td>{{count($item->getmembers)}}</td>
                       <td>{{$item->status}}</td>
+                      <td><a href="{{url('customer/viewfamily')}}/{{$item->id}}">View</a></td>
                     </tr>
                     @endforeach
                   </tbody>
                 </table>
             </div>
             <!-- /.row -->
-@endsection            
+ @endsection              
         

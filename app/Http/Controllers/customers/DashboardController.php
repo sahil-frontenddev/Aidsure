@@ -15,6 +15,8 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Intervention\Image\ImageManagerStatic as Image;
 
+use PDF;
+
 class DashboardController extends Controller
 {
     
@@ -41,6 +43,30 @@ class DashboardController extends Controller
             return View('customers.login');
         }
         
+    }
+
+    public function viewfamily($id){
+        $family = Family::where('id',$id)->with('getmembers')->first();
+        // print_r($family);
+        
+        // $pdf = PDF::loadView('customers.viewfamily',compact('family'));
+        //     return $pdf->download('pdfview.pdf');
+
+        if(Auth::check() && Auth::user()->role == "customer") {
+
+             return view('customers.viewfamily',['family'=>$family]);
+        }
+        else{
+
+            return View('customers.login');
+        }
+        
+    }
+
+    public function downloadpdf($id){
+        $family = Family::where('id',$id)->with('getmembers')->first();
+        $pdf = PDF::loadView('customers.downloadpdf',compact('family'));
+        return $pdf->download('pdfview.pdf');
     }
 
     public function customer_newfamily(Request $request){

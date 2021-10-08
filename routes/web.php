@@ -46,6 +46,8 @@ Route::get('admin/addmedicalstore', 'App\Http\Controllers\admin\AdminController@
 
 Route::get('customer/family', 'App\Http\Controllers\customers\DashboardController@customer_family')->name('customer_family'); 
 Route::get('customer/newfamily', 'App\Http\Controllers\customers\DashboardController@customer_newfamily')->name('customer_newfamily'); 
+Route::get('customer/viewfamily/{id}', 'App\Http\Controllers\customers\DashboardController@viewfamily')->name('viewfamily'); 
+Route::get('customer/downloadpdf/{id}', 'App\Http\Controllers\customers\DashboardController@downloadpdf')->name('downloadpdf'); 
 
 Route::get('customer/orders', 'App\Http\Controllers\customers\DashboardController@customer_order')->name('customer_order'); 
 Route::get('customer/neworder', 'App\Http\Controllers\customers\DashboardController@customer_neworder')->name('customer_neworder');
