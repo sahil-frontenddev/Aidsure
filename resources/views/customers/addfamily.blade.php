@@ -26,10 +26,10 @@
                 <label for="exampleInputEmail1">Adhar Number</label>
                 
               </div>
-              <div class="form-group col-md-4">
+              <!-- <div class="form-group col-md-4">
                 <label for="exampleInputEmail1">Signature</label>
                 
-              </div>
+              </div> -->
             </div>
             <div class="multile">
 
@@ -42,10 +42,10 @@
 	                
 	                <input type="text" name="member[0][adh]" class="form-control adh" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Adhar Number">
 	              </div>
-	              <div class="form-group col-md-4">
+	             <!--  <div class="form-group col-md-4">
 	                
 	                <input type="text" name="member[0][sign]" class="form-control sign" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Signature">
-	              </div>
+	              </div> -->
 	            </div>
                
 	        </div> 

@@ -24,6 +24,7 @@
                       <td>{{$item->phone}}</td>
                       <td>{{$item->status}}</td>
                       <td class="makeactive">
+                        <a href="{{url('/admin/hospitalview')}}/{{$item->id}}"><i class="fa fa-eye"></i></a>
                         @if($item->status == 'approve')
                          <i class="fa fa-star active" data-id="{{$item->id}}" data-status="not-approve"/>
                         @else

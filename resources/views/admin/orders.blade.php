@@ -2,7 +2,7 @@
 @section('content')
             <div class="row" id="main" >
                 <div class="col-sm-12 col-md-12 well" id="content">
-                    <h1>All Family</h1>
+                    <h1>All Orders</h1>
                 </div>
                 <table class="table" id="usertable">
                   <thead>

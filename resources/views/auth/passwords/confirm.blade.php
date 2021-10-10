@@ -1,9 +1,9 @@
-@extends('layouts.app')
+@extends('layouts.frontend.app')
 
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-8 resetpass">
             <div class="card">
                 <div class="card-header">{{ __('Confirm Password') }}</div>
 
@@ -46,4 +46,11 @@
         </div>
     </div>
 </div>
+<style type="text/css">
+.resetpass{
+    padding-top: 200px;
+    padding-bottom: 50px;  
+}
+
+</style>
 @endsection

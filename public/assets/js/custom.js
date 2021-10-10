@@ -271,7 +271,7 @@ $(".addmore").click(function(){
 
 	var numItems = $('.rowc').length;
 	numItems = numItems+1;
-	var html = '<div class="col-md-12 rowc"><div class="form-group col-md-4"><input type="text" name="member['+numItems+'][name]" class="form-control fname" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Name" min="10" max="10"></div><div class="form-group col-md-4"><input type="text" name="member['+numItems+'][adh]" class="form-control adh" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Adhar Number"></div><div class="form-group col-md-4"><input type="text" name="member['+numItems+'][sign]" class="form-control sign" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Signature"></div></div>';
+	var html = '<div class="col-md-12 rowc"><div class="form-group col-md-4"><input type="text" name="member['+numItems+'][name]" class="form-control fname" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Name" min="10" max="10"></div><div class="form-group col-md-4"><input type="text" name="member['+numItems+'][adh]" class="form-control adh" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Adhar Number"></div></div>';
 	$(".multile").append(html);
 
 })
@@ -588,7 +588,85 @@ $(".makeactivelaboratory i").click(function(){
 
 })
 
+$(".createslide").click(function(){
 
+	$('.valid-body').html('');
+	var vdata = $('form').serializeArray();
+	var html = '';
+	var val = [];
+	for (const key of  vdata){
+		if(key.value == "" && key.name != 'email'){
+			val.push(key.value);
+			html += '<li>'+key.name+' is requeired!</li>';
+		}
+		
+	}
+	if(val.length > 0){
+		$('.valid-body').html(html);
+		$('#validationModal').modal('show');
+		return false;
+	}
+
+	var data = $('form').serialize();
+	$.ajax({
+            url: apiendpoint+'admin/createslide',
+            type: "post",
+            headers: {
+                        'Accept': 'application/json',
+                        'Authorization': 'Bearer '+localStorage.getItem('ff_token'),
+            },
+            data:data,
+            async:false,
+          }).done(function(res) {
+          	
+          	if(res.status == 'success'){
+          		alert('Slide created successfullly');
+          		location.href = siteurl+'admin/slides';
+          	}
+          	
+          })
+	
+})
+
+$(".editslide").click(function(){
+
+	$('.valid-body').html('');
+	var vdata = $('form').serializeArray();
+	var html = '';
+	var val = [];
+	for (const key of  vdata){
+		if(key.value == "" && key.name != 'email'){
+			val.push(key.value);
+			html += '<li>'+key.name+' is requeired!</li>';
+		}
+		
+	}
+	if(val.length > 0){
+		$('.valid-body').html(html);
+		$('#validationModal').modal('show');
+		return false;
+	}
+
+	var data = $('form').serialize();
+	$.ajax({
+            url: apiendpoint+'admin/editslide',
+            type: "post",
+            headers: {
+                        'Accept': 'application/json',
+                        'Authorization': 'Bearer '+localStorage.getItem('ff_token'),
+            },
+            data:data,
+            async:false,
+          }).done(function(res) {
+          	
+          	if(res.status == 'success'){
+          		alert('Slide updated successfullly');
+          		location.href = siteurl+'admin/slides';
+          	}
+          	
+          })
+	
+})
 											
 function readFile() {
   

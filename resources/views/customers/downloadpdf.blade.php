@@ -1,81 +1,160 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Aidsure</title>
 
-            <div class="row" id="main" >
-            
-                
-                <div class="downpdf" id="content">
-                    <div class="row">
-                      <div class="col-sm-12 col-md-12 well" >
-                          <h1>Family Information</h1>
-                      </div>
-                      <div class="col-md-12">
-                          <div class="col-md-3" style="width:1000px;height: 40px;">
-                            <table>
-                              <tr>
-                                <td style="width:150px;font-weight: bold;bottom:10">Reg. Numb.</td>
-                                    <td style="width:150px;padding-left: 20px;font-weight: bold;bottom:10">Email</td>
-                                    <td style="width:150px;padding-left: 20px;font-weight: bold;bottom:10">Country</td>
-                                    <td style="width:150px;padding-left: 20px;font-weight: bold;bottom:10">Date</td>
-                              </tr>
-                            <tr>
-                             
-                                   <td style="width:150px">{{$family->family_id}}</td>
-                                  <td style="width:150px;padding-left: 20px;margin-top: 30px;">{{$family->email}}</td>
-                                  <td style="width:150px;padding-left: 20px;margin-top: 30px;">{{$family->country}}</td>
-                                  <td style="width:150px;padding-left: 20px;margin-top: 30px;">{{$family->date}}</td>
-                            </tr>
-                          </table>
+    <style>
+      .invoice-box {
+        max-width: 800px;
+        margin: auto;
+        padding: 30px;
+        border: 1px solid red;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+        font-size: 16px;
+        line-height: 24px;
+        font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+        color: #555;
+      }
 
-                          <table>
-                              <tr>
-                                <td style="width:150px;font-weight: bold;bottom:10">Phone</td>
-                                    <td style="width:150px;padding-left: 20px;font-weight: bold;bottom:10">City</td>
-                                    <td style="width:150px;padding-left: 20px;font-weight: bold;bottom:10">State</td>
-                                    <td style="width:150px;padding-left: 20px;font-weight: bold;bottom:10">Address</td>
-                              </tr>
-                            <tr>
-                             
-                                  <td style="width:150px">{{$family->phone}}</td>
-                                  <td style="width:150px;padding-left: 20px;margin-top: 30px;">{{$family->city}}</td>
-                                  <td style="width:150px;padding-left: 20px;margin-top: 30px;">{{$family->state}}</td>
-                                  <td style="width:150px;padding-left: 20px;margin-top: 30px;">{{$family->address}}</td>
-                            </tr>
-                          </table>
-                              
-                              
-                          </div>
-                         
-                         
-                      </div>
+      .invoice-box table {
+        width: 100%;
+        line-height: inherit;
+        text-align: left;
+      }
 
-                    </div>  
+      .invoice-box table td {
+        padding: 5px;
+        vertical-align: top;
+      }
 
-                    <div class="row" style="margin-top:100px;">
-                       <div class="col-sm-12 col-md-12 well" >
-                          <h1>Family Members</h1>
-                      </div>
-                      <div class="col-md-3" style="width:1000px">
+      .invoice-box table tr td:nth-child(2) {
+        text-align: right;
+      }
 
-                        <table>
-                          <tr>
-                          <td style="width:200px;font-weight: bold;padding-top: 0px;">Name</td>
-                          <td style="width:200px;padding-left: 20px;font-weight: bold">Adhaar Number</td>
-                          <td style="width:200px;padding-left: 20px;font-weight: bold">Signature</td>
-                        </tr>
-                       
-                      @foreach($family->getmembers as $item)
-                        <tr>
-                              <td style="width:200px;padding-left:  0px;margin-top: 30px;">{{$item->name}}</td>
-                              <td style="width:200px;padding-left: 20px;margin-top: 30px;">{{$item->adhar}}</td>
-                              <td style="width:200px;padding-left: 20px;margin-top: 30px;">{{$item->signature}}</td>
-                        </tr>
-                      @endforeach
-                       </table>
-                    </div>  
+      .invoice-box table tr.top table td {
+        padding-bottom: 20px;
+      }
 
-                </div>
-            </div>
-            <style type="text/css">
-             
-            </style>
-            
-            <!-- /.row -->
+      .invoice-box table tr.top table td.title {
+        font-size: 45px;
+        line-height: 45px;
+        color: #333;
+      }
+
+      .invoice-box table tr.information table td {
+        padding-bottom: 40px;
+      }
+
+      .invoice-box table tr.heading td {
+        background: #eee;
+        border-bottom: 1px solid #ddd;
+        font-weight: bold;
+      }
+
+      .invoice-box table tr.details td {
+        padding-bottom: 20px;
+      }
+
+      .invoice-box table tr.item td {
+        border-bottom: 1px solid #eee;
+      }
+
+      .invoice-box table tr.item.last td {
+        border-bottom: none;
+      }
+
+      .invoice-box table tr.total td:nth-child(2) {
+        border-top: 2px solid #eee;
+        font-weight: bold;
+      }
+
+      @media only screen and (max-width: 600px) {
+        .invoice-box table tr.top table td {
+          width: 100%;
+          display: block;
+          text-align: center;
+        }
+
+        .invoice-box table tr.information table td {
+          width: 100%;
+          display: block;
+          text-align: center;
+        }
+      }
+
+      /** RTL **/
+      .invoice-box.rtl {
+        direction: rtl;
+        font-family: Tahoma, 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+      }
+
+      .invoice-box.rtl table {
+        text-align: right;
+      }
+
+      .invoice-box.rtl table tr td:nth-child(2) {
+        text-align: left;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="invoice-box">
+      <table cellpadding="0" cellspacing="0">
+        <tr class="top">
+          <td colspan="2">
+            <table>
+              <tr>
+                <td class="title">
+                  AidSure
+                </td>
+
+                <td>
+                  Invoice #: {{$family->family_id}}<br />
+                  Created: {{$family->date}}<br />
+                  
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+        <tr class="information">
+          <td colspan="2">
+            <table>
+              <tr>
+                <td>
+                  {{$family->st_address}}<br />
+                  {{$family->address}}<br />
+                  
+                </td>
+
+                <td>
+                  {{$family->email}}<br />
+                  {{$family->Phone}}<br />
+                  {{$family->city}},{{$family->state}}
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+        <tr class="heading">
+          <td>Name</td>
+
+          <td>Adhaar Number</td>
+        </tr>
+        @foreach($family->getmembers as $item)
+        <tr class="details">
+          <td>{{$item->name}}</td>
+
+          <td>{{$item->adhar}}</td>
+        </tr>
+        @endforeach
+
+      </table>
+    </div>
+  </body>
+</html>
+

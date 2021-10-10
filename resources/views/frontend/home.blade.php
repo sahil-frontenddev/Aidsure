@@ -7,10 +7,12 @@ use App\Models\Hospital;
 use App\Models\Order;
 use App\Models\Laboratory;
 use App\Models\Family;
+use App\Models\Slide;
 
 $users = User::where('status','approve')->get();
 $hospital = Hospital::where('status','approve')->get();
 $family = Family::where('status','approve')->get();
+$slide = Slide::get();
 
 
 @endphp
@@ -23,31 +25,15 @@ $family = Family::where('status','approve')->get();
       <div class="carousel-inner" role="listbox">
 
         <!-- Slide 1 -->
-        <div class="carousel-item active" style="background-image: url(public/assets/img/slide/slide-1.jpg)">
+        @foreach($slide as $sld)
+        <div class="carousel-item active" style="background-image: url({{asset('public/')}}/{{$sld->image}})">
           <div class="container">
-            <h2>Welcome to <span>AIDSURE</span></h2>
-            <p>Aidsure Mission is to finish the commissions in medical field which reached at 40-45 % goes to agents who refer the patient. Due to which the treatment prices are very high and some people are not able to afford treatment in good Hospitals.</p>
+            <h2>{!! $sld->title !!}</h2>
+            <p>{{$sld->description}}</p>
             <a href="#about" class="btn-get-started scrollto">Read More</a>
           </div>
         </div>
-
-        <!-- Slide 2 -->
-        <div class="carousel-item" style="background-image: url(public/assets/img/slide/slide-2.jpg)">
-          <div class="container">
-             <h2>Welcome to <span>AIDSURE</span></h2>
-            <p>Aidsure Mission is to finish the commissions in medical field which reached at 40-45 % goes to agents who refer the patient. Due to which the treatment prices are very high and some people are not able to afford treatment in good Hospitals.</p>
-            <a href="#about" class="btn-get-started scrollto">Read More</a>
-          </div>
-        </div>
-
-        <!-- Slide 3 -->
-        <div class="carousel-item" style="background-image: url(public/assets/img/slide/slide-3.jpg)">
-          <div class="container">
-             <h2>Welcome to <span>AIDSURE</span></h2>
-            <p>Aidsure Mission is to finish the commissions in medical field which reached at 40-45 % goes to agents who refer the patient. Due to which the treatment prices are very high and some people are not able to afford treatment in good Hospitals.</p>
-            <a href="#about" class="btn-get-started scrollto">Read More</a>
-          </div>
-        </div>
+        @endforeach
 
       </div>
 

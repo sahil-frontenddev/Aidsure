@@ -24,11 +24,13 @@
                       <td>{{$item->phone}}</td>
                       <td>{{$item->status}}</td>
                       <td class="makeactiveCenter">
+                        <a href="{{url('/admin/viewcenter')}}/{{$item->id}}"><i class="fa fa-eye"></i></a>
                         @if($item->status == 'approve')
                          <i class="fa fa-star active" data-id="{{$item->id}}" data-status="not-approve"/>
                         @else
                          <i class="fa fa-star" data-id="{{$item->id}}" data-status="approve"/>
                         @endif
+
                     </td>
                     </tr>
                     @endforeach

@@ -14,6 +14,7 @@ use App\Models\Hospital;
 use App\Models\Order;
 use App\Models\Laboratory;
 use App\Models\Medicalstore;
+use App\Models\Slide;
 
 class AdminController extends Controller
 {
@@ -59,7 +60,7 @@ class AdminController extends Controller
     }
     
     public function centers(){
-     $centers = User::where('role','customer')->get();
+     $centers = User::where('role','customer')->orderby('id','desc')->get();
      if(Auth::check() && Auth::user()->role == "admin") {
 
            return view('admin.centers',['centers'=>$centers]);
@@ -106,7 +107,7 @@ class AdminController extends Controller
     }
 
     public function hospitals(){
-        $centers = Hospital::get();
+        $centers = Hospital::orderby('id','asc')->get();
         if(Auth::check() && Auth::user()->role == "admin") {
 
              return view('admin.hospitals',['centers'=>$centers]);
@@ -152,7 +153,7 @@ class AdminController extends Controller
     }
 
     public function orders(){
-        $family = Order::get();
+        $family = Order::orderby('id','desc')->get();
 
         if(Auth::check() && Auth::user()->role == "admin") {
 
@@ -226,7 +227,7 @@ class AdminController extends Controller
 
 
     public function laboratory(){
-        $centers = Laboratory::get();
+        $centers = Laboratory::orderby('id','desc')->get();
         if(Auth::check() && Auth::user()->role == "admin") {
 
              return view('admin.laboratory',['centers'=>$centers]);
@@ -273,7 +274,7 @@ class AdminController extends Controller
 
 
     public function medicalstores(){
-        $centers = Medicalstore::get();
+        $centers = Medicalstore::orderby('id','desc')->get();
         if(Auth::check() && Auth::user()->role == "admin") {
 
              return view('admin.medicalstores',['centers'=>$centers]);
@@ -318,6 +319,101 @@ class AdminController extends Controller
 
     }
 
+    public function addslide(){
+        if(Auth::check() && Auth::user()->role == "admin") {
+
+            return View('admin.createslide');
+        }
+        else{
+
+            return View('admin.login');
+        }
+        
+    }
+
+    public function createslide(Request $request){
+
+        $Slide = new Slide();
+        $Slide->title = $request->title;
+        $Slide->description = $request->description;
+        $Slide->image = $request->attachimage;
+        
+        if($Slide->save()){
+           
+            return (new Response(['status'=>'success'], '200'));
+        }
+        else{
+            return (new Response(['status'=>'error','msg'=>'Registration failed!'], '200'));
+        }
+
+    }
+    public function editslideview($id){
+
+        $slide = Slide::where('id',$id)->first();
+        // print_r($slide);die;
+        if(Auth::check() && Auth::user()->role == "admin") {
+
+            return View('admin.editslide',['slide'=>$slide]);
+        }
+        else{
+
+            return View('admin.login');
+        }
+        
+    }
+    public function editslide(Request $request){
+
+        $Slide = Slide::find($request->id);
+        $Slide->title = $request->title;
+        $Slide->description = $request->description;
+        $Slide->image = $request->attachimage;
+        
+        if($Slide->save()){
+           
+            return (new Response(['status'=>'success'], '200'));
+        }
+        else{
+            return (new Response(['status'=>'error','msg'=>'Registration failed!'], '200'));
+        }
+
+    }
+
+    public function slides(){
+        $centers = Slide::orderby('id','desc')->get();
+        if(Auth::check() && Auth::user()->role == "admin") {
+
+             return view('admin.slides',['centers'=>$centers]);
+        }
+        else{
+
+            return View('admin.login');
+        }
+        // return view('admin.hospitals',['centers'=>$centers]);
+    }
+
+    public function viewcenters($id){
+        $centers = User::where('id',$id)->first();
+         if(Auth::check() && Auth::user()->role == "admin") {
+
+               return view('admin.viewcenter',['center'=>$centers]);
+            }
+            else{
+
+                return View('admin.login');
+            }
+    }
 
 
+        public function hospitalview($id){
+        $centers = Hospital::where('id',$id)->first();
+         if(Auth::check() && Auth::user()->role == "admin") {
+
+               return view('admin.hospitalview',['center'=>$centers]);
+            }
+            else{
+
+                return View('admin.login');
+            }
+
+    }
 }

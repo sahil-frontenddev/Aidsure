@@ -44,9 +44,14 @@ class SignupController extends Controller
         if ($validator->fails()) {
             return (new Response(['status'=>'error','msg'=>'Email already exists!'], '200'));
         }
+        $fam = User::where('role','customer')->get();
+        
+        $stnum = '00';
+        $countnm = strval(count($fam)+1);
+        $newf_id = $stnum.$countnm;
         $user = new User();
         $user->name = $request->username;
-        $user->unique_number = rand();
+        $user->unique_number = $newf_id;
         $user->email = $request->youremail;
         $user->city = $request->city;
         $user->state = $request->state;

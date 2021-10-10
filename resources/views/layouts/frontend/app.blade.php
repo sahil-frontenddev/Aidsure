@@ -46,7 +46,7 @@
         <i class="icofont-clock-time"></i> Monday - Saturday, 8AM to 10PM
       </div>
       <div class="d-flex align-items-center">
-        <i class="icofont-phone"></i> Call us now +1 5589 55488 55
+        <i class="icofont-phone"></i> Call us now +91 73473-06805
       </div>
     </div>
   </div>
@@ -74,7 +74,7 @@
         </ul>
       </nav><!-- .nav-menu -->
 
-      <a href="#appointment" class="appointment-btn scrollto"><span class="d-none d-md-inline">Make an</span> Appointment</a>
+      <!-- <a href="#appointment" class="appointment-btn scrollto"><span class="d-none d-md-inline">Make an</span> Appointment</a> -->
 
     </div>
   </header><!-- End Header -->

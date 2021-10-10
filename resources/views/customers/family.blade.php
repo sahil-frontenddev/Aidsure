@@ -26,7 +26,9 @@
                       <td>{{$item->phone}}</td>
                       <td>{{count($item->getmembers)}}</td>
                       <td>{{$item->status}}</td>
+                      @if($item->status == "approve")
                       <td><a href="{{url('customer/viewfamily')}}/{{$item->id}}">View</a></td>
+                      @endif
                     </tr>
                     @endforeach
                   </tbody>

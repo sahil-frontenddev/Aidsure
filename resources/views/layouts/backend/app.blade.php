@@ -30,7 +30,7 @@
                 <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="https://bryanrojasq.wordpress.com">
-                <img src="http://placehold.it/200x50&text=LOGO" alt="LOGO">
+                <img src="{{asset('public/assets/img/logo.png')}}" style="width: 170px;" alt="LOGO">
             </a>
         </div>
         <!-- Top Menu Items -->
@@ -39,9 +39,8 @@
                 </a>
             </li>            
             <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin User <b class="fa fa-angle-down"></b></a>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{Auth::user()->name}} <b class="fa fa-angle-down"></b></a>
                 <ul class="dropdown-menu">
-                    <li><a href="#"><i class="fa fa-fw fa-user"></i> Edit Profile</a></li>
                     <li><a href="#"><i class="fa fa-fw fa-cog"></i> Change Password</a></li>
                     <li class="divider"></li>
                     <li><a href="#" class="logout"><i class="fa fa-fw fa-power-off"></i> Logout</a></li>
@@ -92,6 +91,13 @@
                     <li><a href="{{route('admin_addmedicalstore')}}"><i class="fa fa-angle-double-right"></i> Add New Medical Store</a></li>
                 </ul>
                 </li>
+                <li>
+                    <a href="#" data-toggle="collapse" data-target="#submenu-7"><i class="fa fa-users"></i> Slider <i class="fa fa-fw fa-angle-down pull-right"></i></a>
+                 <ul id="submenu-7" class="collapse">
+                    <li><a href="{{route('admin_slides')}}"><i class="fa fa-angle-double-right"></i> Slides</a></li>
+                    <li><a href="{{route('admin_addslide')}}"><i class="fa fa-angle-double-right"></i> Add New Slide</a></li>
+                </ul>
+                </li>
             </ul>
         </div>
         <!-- /.navbar-collapse -->
@@ -109,7 +115,9 @@
 </div><!-- /#wrapper -->
 <script type="text/javascript">
     $(document).ready(function() {
-    $('.table').DataTable();
+    $('.table').DataTable( {
+        "order": [[ 0, "desc" ]]
+    } );
 } );
 </script>
 <script src="{{asset('public/assets/js/custom.js')}}"></script>

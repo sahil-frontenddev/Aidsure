@@ -41,6 +41,8 @@ Route::get('admin/laboratorystatus/{id}/{status}', 'App\Http\Controllers\admin\A
 Route::post('admin/addhospital', 'App\Http\Controllers\admin\AdminController@addnewhospital');
 Route::post('admin/addnewlaboratory', 'App\Http\Controllers\admin\AdminController@addnewlaboratory');
 Route::post('admin/addnewmedicalstore', 'App\Http\Controllers\admin\AdminController@addnewmedicalstore');
+Route::post('admin/createslide', 'App\Http\Controllers\admin\AdminController@createslide');
+Route::post('admin/editslide', 'App\Http\Controllers\admin\AdminController@editslide');
 
 Route::post('customer/createfamily', 'App\Http\Controllers\customers\DashboardController@createfamily');
 Route::post('customer/createorder', 'App\Http\Controllers\customers\DashboardController@createorder');

@@ -41,6 +41,11 @@ Route::get('admin/laboratory', 'App\Http\Controllers\admin\AdminController@labor
 Route::get('admin/addlaboratory', 'App\Http\Controllers\admin\AdminController@addlaboratory')->name('admin_addlaboratory'); 
 Route::get('admin/medicalstores', 'App\Http\Controllers\admin\AdminController@medicalstores')->name('admin_medicalstores'); 
 Route::get('admin/addmedicalstore', 'App\Http\Controllers\admin\AdminController@addmedicalstore')->name('admin_addmedicalstore'); 
+Route::get('admin/slides', 'App\Http\Controllers\admin\AdminController@slides')->name('admin_slides'); 
+Route::get('admin/addslide', 'App\Http\Controllers\admin\AdminController@addslide')->name('admin_addslide'); 
+Route::get('admin/editslide/{id}', 'App\Http\Controllers\admin\AdminController@editslideview')->name('admin_editslideview'); 
+Route::get('admin/viewcenter/{id}', 'App\Http\Controllers\admin\AdminController@viewcenters')->name('admin_viewcenters'); 
+Route::get('admin/hospitalview/{id}', 'App\Http\Controllers\admin\AdminController@hospitalview')->name('admin_hospitalview'); 
 
 //Customer
 

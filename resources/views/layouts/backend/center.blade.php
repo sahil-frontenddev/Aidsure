@@ -30,7 +30,7 @@
                 <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="https://bryanrojasq.wordpress.com">
-                <img src="http://placehold.it/200x50&text=LOGO" alt="LOGO">
+                <img src="{{asset('public/assets/img/logo.png')}}" style="width: 170px;" alt="LOGO">
             </a>
         </div>
         <!-- Top Menu Items -->
@@ -39,9 +39,8 @@
                 </a>
             </li>            
             <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Center User <b class="fa fa-angle-down"></b></a>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{Auth::user()->name}} <b class="fa fa-angle-down"></b></a>
                 <ul class="dropdown-menu">
-                    <li><a href="#"><i class="fa fa-fw fa-user"></i> Edit Profile</a></li>
                     <li><a href="#"><i class="fa fa-fw fa-cog"></i> Change Password</a></li>
                     <li class="divider"></li>
                     <li><a href="#" class="logout2"><i class="fa fa-fw fa-power-off"></i> Logout</a></li>

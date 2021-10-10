@@ -32,7 +32,7 @@ class DashboardController extends Controller
     }
 
     public function customer_family(){
-        $family = Family::with('getmembers')->get();
+        $family = Family::with('getmembers')->orderby('id','desc')->get();
 
         if(Auth::check() && Auth::user()->role == "customer") {
 
@@ -83,10 +83,13 @@ class DashboardController extends Controller
     }
 
     public function createfamily(Request $request){
-
+        $fam = Family::get();
         $family = new Family();
-
-        $family->family_id = rand();
+        $stnum = '00';
+        $countnm = strval(count($fam)+1);
+        $newf_id = $stnum.$countnm;
+        // echo $newf_id; die;
+        $family->family_id = $newf_id;
         // $family->rnf = $request->r_number;
         $family->st_address = $request->st_address;
         $family->city = $request->city;
@@ -104,7 +107,7 @@ class DashboardController extends Controller
                 $member->family_id = $family->id;
                 $member->name = $item['name'];
                 $member->adhar = $item['adh'];
-                $member->signature = $item['sign'];
+                // $member->signature = $item['sign'];
                 $member->save();
             }
         return (new Response(['status'=>'success','msg'=>'Success!'], '200'));
@@ -128,7 +131,7 @@ class DashboardController extends Controller
     }
 
     public function customer_order(){
-        $family = Order::get();
+        $family = Order::orderby('id','desc')->get();
 
         if(Auth::check() && Auth::user()->role == "customer") {
 
