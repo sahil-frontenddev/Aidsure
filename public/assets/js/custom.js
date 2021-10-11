@@ -219,8 +219,48 @@ $(".createhospital").click(function(){
           }).done(function(res) {
           	
           	if(res.status == 'success'){
-          		alert('Family created successfullly');
+          		alert('Hospital created successfullly');
           		location.href = siteurl+'admin/hospitals';
+          	}
+          	
+          })
+	
+})
+
+$(".changepassword").click(function(){
+
+		$('.valid-body').html('');
+	var vdata = $('form').serializeArray();
+	var html = '';
+	var val = [];
+	for (const key of  vdata){
+		if(key.value == "" && key.name != 'email'){
+			val.push(key.value);
+			html += '<li>'+key.name+' is requeired!</li>';
+		}
+		
+	}
+	if(val.length > 0){
+		$('.valid-body').html(html);
+		$('#validationModal').modal('show');
+		return false;
+	}
+
+	var data = $('form').serialize();
+	$.ajax({
+            url: apiendpoint+'changepassword',
+            type: "post",
+            headers: {
+                        'Accept': 'application/json',
+                        'Authorization': 'Bearer '+localStorage.getItem('ff_token'),
+            },
+            data:data,
+            async:false,
+          }).done(function(res) {
+          	
+          	if(res.status == 'success'){
+          		alert('Password successfullly changed');
+          		// location.href = siteurl+'admin/hospitals';
           	}
           	
           })

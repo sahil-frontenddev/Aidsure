@@ -47,6 +47,7 @@ Route::post('admin/editslide', 'App\Http\Controllers\admin\AdminController@edits
 Route::post('customer/createfamily', 'App\Http\Controllers\customers\DashboardController@createfamily');
 Route::post('customer/createorder', 'App\Http\Controllers\customers\DashboardController@createorder');
 Route::post('uploadimage', 'App\Http\Controllers\customers\DashboardController@uploadimage');
+Route::post('changepassword', 'App\Http\Controllers\customers\DashboardController@newchangepassword');
 
 
 });

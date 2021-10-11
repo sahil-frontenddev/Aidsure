@@ -1,5 +1,10 @@
 @extends('layouts.backend.center')
 @section('content')
+
+@php
+use App\Models\User;
+$user = User::where('role','customer')->get();
+@endphp
           <div class="row" id="main" >
             <div class="col-sm-12 col-md-12 well" id="content">
                 <h1>Add New Order</h1>
@@ -41,6 +46,14 @@
                 <label for="exampleInputEmail1">Sergical Item</label>
                 <input type="text" name="sergical" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
               </div>
+              <!-- <div class="form-group col-md-6">
+                <label for="exampleInputEmail1">Select Center</label>
+                <select class="form-control" name="center_id" id="exampleFormControlSelect1">
+                  @foreach( $user as $item )
+                  <option value="{{$item->unique_number}}">{{$item->name}}</option>
+                  @endforeach
+                </select>
+              </div> -->
             </div>
             <div class="col-md-12">
               

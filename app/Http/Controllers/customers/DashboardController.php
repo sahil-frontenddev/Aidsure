@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Auth;
+use Hash;
 use App\Passport\Passport;
 use App\Models\User;
 use App\Models\Family;
@@ -149,6 +150,7 @@ class DashboardController extends Controller
         $order = new Order();
 
         $order->tablets = $request->tablets;
+        $order->center_id = 0;
         $order->capsules = $request->capsules;
         $order->syrup = $request->syrup;
         $order->injection = $request->injection;
@@ -175,6 +177,29 @@ class DashboardController extends Controller
                 'status' => 'success',
                 'image'=>$imagename
             ]);
+    }
+
+    public function changepassword(){
+        if(Auth::check() && Auth::user()->role == "customer") {
+
+             return view('customers.changepassword');
+        }
+        else{
+
+            return View('customers.login');
+        }
+    }
+
+    public function newchangepassword(Request $request){
+
+        $user = User::find(Auth::user()->id);
+
+        $user->password = Hash::make($request->password);
+
+        $user->save();
+
+        return (new Response(['status'=>'success','msg'=>'Success!'], '200'));
+
     }
     
 }

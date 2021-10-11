@@ -71,12 +71,7 @@
                     <li><a href="{{route('admin_addhospitals')}}"><i class="fa fa-angle-double-right"></i> Add New Hospital</a></li>
                 </ul>
                 </li>
-                <li>
-                    <a href="#" data-toggle="collapse" data-target="#submenu-4"><i class="fa fa-users"></i> Orders <i class="fa fa-fw fa-angle-down pull-right"></i></a>
-                 <ul id="submenu-4" class="collapse">
-                    <li><a href="{{route('admin_orders')}}"><i class="fa fa-angle-double-right"></i> All Orders</a></li>
-                </ul>
-                </li>
+                
                 <li>
                     <a href="#" data-toggle="collapse" data-target="#submenu-5"><i class="fa fa-users"></i> Laboratory <i class="fa fa-fw fa-angle-down pull-right"></i></a>
                  <ul id="submenu-5" class="collapse">
@@ -89,6 +84,12 @@
                  <ul id="submenu-6" class="collapse">
                     <li><a href="{{route('admin_medicalstores')}}"><i class="fa fa-angle-double-right"></i> All Medical Stores</a></li>
                     <li><a href="{{route('admin_addmedicalstore')}}"><i class="fa fa-angle-double-right"></i> Add New Medical Store</a></li>
+                </ul>
+                </li>
+                <li>
+                    <a href="#" data-toggle="collapse" data-target="#submenu-4"><i class="fa fa-users"></i> Orders <i class="fa fa-fw fa-angle-down pull-right"></i></a>
+                 <ul id="submenu-4" class="collapse">
+                    <li><a href="{{route('admin_orders')}}"><i class="fa fa-angle-double-right"></i> All Orders</a></li>
                 </ul>
                 </li>
                 <li>

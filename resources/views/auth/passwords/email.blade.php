@@ -49,6 +49,10 @@
     padding-top: 200px;
     padding-bottom: 50px;  
 }
+button.btn.btn-primary {
+    background: #e60000;
+    border: none;
+}
 
 </style>
 @endsection

@@ -416,4 +416,41 @@ class AdminController extends Controller
             }
 
     }
+
+    public function laboratoryview($id){
+        $centers = Laboratory::where('id',$id)->first();
+         if(Auth::check() && Auth::user()->role == "admin") {
+
+               return view('admin.laboratoryview',['center'=>$centers]);
+            }
+            else{
+
+                return View('admin.login');
+            }
+
+    }
+    public function storeview($id){
+        $centers = Medicalstore::where('id',$id)->first();
+         if(Auth::check() && Auth::user()->role == "admin") {
+
+               return view('admin.storeview',['center'=>$centers]);
+            }
+            else{
+
+                return View('admin.login');
+            }
+
+    }
+    public function orderview($id){
+        $centers = Order::where('id',$id)->first();
+         if(Auth::check() && Auth::user()->role == "admin") {
+
+               return view('admin.orderview',['center'=>$centers]);
+            }
+            else{
+
+                return View('admin.login');
+            }
+
+    }
 }

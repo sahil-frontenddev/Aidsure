@@ -9,7 +9,7 @@
         max-width: 800px;
         margin: auto;
         padding: 30px;
-        border: 1px solid red;
+        border: 1px solid #555;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
         font-size: 16px;
         line-height: 24px;
@@ -111,7 +111,7 @@
                 </td>
 
                 <td>
-                  Invoice #: {{$family->family_id}}<br />
+                  Family Registration Nummber #: {{$family->family_id}}<br />
                   Created: {{$family->date}}<br />
                   
                 </td>

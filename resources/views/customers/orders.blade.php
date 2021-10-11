@@ -2,7 +2,7 @@
 @section('content')
             <div class="row" id="main" >
                 <div class="col-sm-12 col-md-12 well" id="content">
-                    <h1>All Family</h1>
+                    <h1>All Orders</h1>
                 </div>
                 <table class="table" id="usertable">
                   <thead>
@@ -12,6 +12,7 @@
                       <th scope="col">Capsules</th>
                       <th scope="col">Syrup</th>
                       <th scope="col">Injection</th>
+                      <th scope="col">Date</th>
                       <th scope="col">Status</th>
                     </tr>
                   </thead>
@@ -26,6 +27,7 @@
                       <td>{{$item->capsules}}</td>
                       <td>{{$item->syrup}}</td>
                       <td>{{$item->injection}}</td>
+                      <td>{{$item->created_at}}</td>
                       <td>{{$item->status}}</td>
                      
                     </tr>

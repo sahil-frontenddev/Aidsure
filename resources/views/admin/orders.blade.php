@@ -24,13 +24,14 @@
                     @endphp
                     <tr>
                       <th scope="row">{{$item->id}}</th>
-                      <td>{{$item->unique_number}}</td>
+                      <td>{{$item->center_id}}</td>
                       <td>{{$item->tablets}}</td>
                       <td>{{$item->capsules}}</td>
                       <td>{{$item->syrup}}</td>
                       <td>{{$item->injection}}</td>
                       <td>{{$item->status}}</td>
                       <td class="makeactiveOrder">
+                        <a href="{{url('/admin/orderview')}}/{{$item->id}}"><i class="fa fa-eye"></i></a>
                         @if($item->status == 'approve')
                          <i class="fa fa-star active" data-id="{{$item->id}}" data-status="not-approve"/>
                         @else

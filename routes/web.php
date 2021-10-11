@@ -46,6 +46,9 @@ Route::get('admin/addslide', 'App\Http\Controllers\admin\AdminController@addslid
 Route::get('admin/editslide/{id}', 'App\Http\Controllers\admin\AdminController@editslideview')->name('admin_editslideview'); 
 Route::get('admin/viewcenter/{id}', 'App\Http\Controllers\admin\AdminController@viewcenters')->name('admin_viewcenters'); 
 Route::get('admin/hospitalview/{id}', 'App\Http\Controllers\admin\AdminController@hospitalview')->name('admin_hospitalview'); 
+Route::get('admin/laboratoryview/{id}', 'App\Http\Controllers\admin\AdminController@laboratoryview')->name('admin_laboratoryview'); 
+Route::get('admin/storeview/{id}', 'App\Http\Controllers\admin\AdminController@storeview')->name('admin_storeview'); 
+Route::get('admin/orderview/{id}', 'App\Http\Controllers\admin\AdminController@orderview')->name('admin_orderview'); 
 
 //Customer
 
@@ -56,6 +59,7 @@ Route::get('customer/downloadpdf/{id}', 'App\Http\Controllers\customers\Dashboar
 
 Route::get('customer/orders', 'App\Http\Controllers\customers\DashboardController@customer_order')->name('customer_order'); 
 Route::get('customer/neworder', 'App\Http\Controllers\customers\DashboardController@customer_neworder')->name('customer_neworder');
+Route::get('customer/changepassword', 'App\Http\Controllers\customers\DashboardController@changepassword')->name('customer_changepassword');
 
 
 
