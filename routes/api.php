@@ -19,6 +19,7 @@ Route::post('customer/signup', 'App\Http\Controllers\customers\SignupController@
 Route::post('customer/login', 'App\Http\Controllers\customers\LoginController@login');
 Route::post('admin/login', 'App\Http\Controllers\admin\LoginController@login');
 Route::post('admin/logout', 'App\Http\Controllers\admin\LoginController@Logout');
+Route::post('contact', 'App\Http\Controllers\HomeController@contact');
 
 Route::middleware('auth:api')->group(function () {
 
@@ -35,6 +36,8 @@ Route::get('admin/centerstatus/{id}/{status}', 'App\Http\Controllers\admin\Admin
 Route::get('admin/orderstatus/{id}/{status}', 'App\Http\Controllers\admin\AdminController@orderstatus');
 Route::get('admin/medicalstorestatus/{id}/{status}', 'App\Http\Controllers\admin\AdminController@medicalstorestatus');
 Route::get('admin/laboratorystatus/{id}/{status}', 'App\Http\Controllers\admin\AdminController@laboratorystatus');
+Route::get('admin/familystatus/{id}/{status}', 'App\Http\Controllers\admin\AdminController@familystatus');
+Route::get('admin/deleteimage/{id}', 'App\Http\Controllers\admin\AdminController@deleteimage');
 
 // Hospitals 
 
@@ -43,6 +46,7 @@ Route::post('admin/addnewlaboratory', 'App\Http\Controllers\admin\AdminControlle
 Route::post('admin/addnewmedicalstore', 'App\Http\Controllers\admin\AdminController@addnewmedicalstore');
 Route::post('admin/createslide', 'App\Http\Controllers\admin\AdminController@createslide');
 Route::post('admin/editslide', 'App\Http\Controllers\admin\AdminController@editslide');
+Route::post('admin/uploadimage', 'App\Http\Controllers\admin\AdminController@uploadimage');
 
 Route::post('customer/createfamily', 'App\Http\Controllers\customers\DashboardController@createfamily');
 Route::post('customer/createorder', 'App\Http\Controllers\customers\DashboardController@createorder');

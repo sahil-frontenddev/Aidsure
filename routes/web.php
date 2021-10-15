@@ -17,8 +17,19 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('frontend.home');
 });
+Route::get('/about-us', function () {
+    return view('frontend.about');
+});
 
-
+Route::get('/hospitals', function () {
+    return view('frontend.hospitals');
+});
+Route::get('/medical-stores', function () {
+    return view('frontend.stores');
+});
+Route::get('/laboratories', function () {
+    return view('frontend.laboratory');
+});
 //Customer
 
 Route::get('customer/login', 'App\Http\Controllers\customers\LoginController@index')->name('customer_login');
@@ -49,13 +60,17 @@ Route::get('admin/hospitalview/{id}', 'App\Http\Controllers\admin\AdminControlle
 Route::get('admin/laboratoryview/{id}', 'App\Http\Controllers\admin\AdminController@laboratoryview')->name('admin_laboratoryview'); 
 Route::get('admin/storeview/{id}', 'App\Http\Controllers\admin\AdminController@storeview')->name('admin_storeview'); 
 Route::get('admin/orderview/{id}', 'App\Http\Controllers\admin\AdminController@orderview')->name('admin_orderview'); 
-
+Route::get('admin/changepassword', 'App\Http\Controllers\admin\AdminController@changepassword')->name('admin_changepassword');
+Route::get('admin/family', 'App\Http\Controllers\admin\AdminController@family')->name('admin_family');
+Route::get('admin/viewfamily/{id}', 'App\Http\Controllers\admin\AdminController@viewfamily')->name('admin_viewfamily');
+Route::get('admin/gallery', 'App\Http\Controllers\admin\AdminController@gallery')->name('admin_gallery');
 //Customer
 
 Route::get('customer/family', 'App\Http\Controllers\customers\DashboardController@customer_family')->name('customer_family'); 
 Route::get('customer/newfamily', 'App\Http\Controllers\customers\DashboardController@customer_newfamily')->name('customer_newfamily'); 
 Route::get('customer/viewfamily/{id}', 'App\Http\Controllers\customers\DashboardController@viewfamily')->name('viewfamily'); 
-Route::get('customer/downloadpdf/{id}', 'App\Http\Controllers\customers\DashboardController@downloadpdf')->name('downloadpdf'); 
+Route::get('customer/downloadpdf/{id}', 'App\Http\Controllers\customers\DashboardController@downloadpdf')->name('downloadpdf');
+Route::get('customer/orderview/{id}', 'App\Http\Controllers\customers\DashboardController@orderview')->name('admin_orderview'); 
 
 Route::get('customer/orders', 'App\Http\Controllers\customers\DashboardController@customer_order')->name('customer_order'); 
 Route::get('customer/neworder', 'App\Http\Controllers\customers\DashboardController@customer_neworder')->name('customer_neworder');

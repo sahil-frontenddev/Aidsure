@@ -9,3 +9,26 @@ section.customer_login {
     text-transform: uppercase;
     color: red;
 }
+
+section#about {
+    padding-top: 190px;
+}
+
+@media screen and (max-width: 767px) {
+section.customer_login {
+    /* margin: 100px auto; */
+    width: 100%;
+    padding: 20px;
+}
+
+}
+@media screen and (max-width: 1024px) {
+section.customer_login {
+    margin: 100px auto;
+    width: 60%;
+    padding: 20px;
+}
+section#about {
+    padding-top: 100px;
+}
+}

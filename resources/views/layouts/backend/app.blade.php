@@ -41,7 +41,7 @@
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{Auth::user()->name}} <b class="fa fa-angle-down"></b></a>
                 <ul class="dropdown-menu">
-                    <li><a href="#"><i class="fa fa-fw fa-cog"></i> Change Password</a></li>
+                    <li><a href="{{route('admin_changepassword')}}"><i class="fa fa-fw fa-cog"></i> Change Password</a></li>
                     <li class="divider"></li>
                     <li><a href="#" class="logout"><i class="fa fa-fw fa-power-off"></i> Logout</a></li>
                 </ul>
@@ -93,11 +93,20 @@
                 </ul>
                 </li>
                 <li>
+                    <a href="#" data-toggle="collapse" data-target="#submenu-8"><i class="fa fa-users"></i> Families <i class="fa fa-fw fa-angle-down pull-right"></i></a>
+                 <ul id="submenu-8" class="collapse">
+                    <li><a href="{{route('admin_family')}}"><i class="fa fa-angle-double-right"></i> All Families</a></li>
+                </ul>
+                </li>
+                <li>
                     <a href="#" data-toggle="collapse" data-target="#submenu-7"><i class="fa fa-users"></i> Slider <i class="fa fa-fw fa-angle-down pull-right"></i></a>
                  <ul id="submenu-7" class="collapse">
                     <li><a href="{{route('admin_slides')}}"><i class="fa fa-angle-double-right"></i> Slides</a></li>
                     <li><a href="{{route('admin_addslide')}}"><i class="fa fa-angle-double-right"></i> Add New Slide</a></li>
                 </ul>
+                </li>
+                <li>
+                    <a href="{{route('admin_gallery')}}">Gallery</a>
                 </li>
             </ul>
         </div>

@@ -8,11 +8,13 @@ use App\Models\Order;
 use App\Models\Laboratory;
 use App\Models\Family;
 use App\Models\Slide;
+use App\Models\Gallery;
 
 $users = User::where('status','approve')->get();
 $hospital = Hospital::where('status','approve')->get();
 $family = Family::where('status','approve')->get();
 $slide = Slide::get();
+$gallery = Gallery::get();
 
 
 @endphp
@@ -566,14 +568,9 @@ $slide = Slide::get();
         </div>
 
         <div class="owl-carousel gallery-carousel" data-aos="fade-up" data-aos-delay="100">
-          <a href="public/assets/img/gallery/gallery-1.jpg" class="venobox" data-gall="gallery-carousel"><img src="public/assets/img/gallery/gallery-1.jpg" alt=""></a>
-          <a href="public/assets/img/gallery/gallery-2.jpg" class="venobox" data-gall="gallery-carousel"><img src="public/assets/img/gallery/gallery-2.jpg" alt=""></a>
-          <a href="public/assets/img/gallery/gallery-3.jpg" class="venobox" data-gall="gallery-carousel"><img src="public/assets/img/gallery/gallery-3.jpg" alt=""></a>
-          <a href="public/assets/img/gallery/gallery-4.jpg" class="venobox" data-gall="gallery-carousel"><img src="public/assets/img/gallery/gallery-4.jpg" alt=""></a>
-          <a href="public/assets/img/gallery/gallery-5.jpg" class="venobox" data-gall="gallery-carousel"><img src="public/assets/img/gallery/gallery-5.jpg" alt=""></a>
-          <a href="public/assets/img/gallery/gallery-6.jpg" class="venobox" data-gall="gallery-carousel"><img src="public/assets/img/gallery/gallery-6.jpg" alt=""></a>
-          <a href="public/assets/img/gallery/gallery-7.jpg" class="venobox" data-gall="gallery-carousel"><img src="public/assets/img/gallery/gallery-7.jpg" alt=""></a>
-          <a href="public/assets/img/gallery/gallery-8.jpg" class="venobox" data-gall="gallery-carousel"><img src="public/assets/img/gallery/gallery-8.jpg" alt=""></a>
+          @foreach($gallery as $sld)
+          <a href="{{asset('public/')}}/{{$sld->name}}" class="venobox" data-gall="gallery-carousel"><img src="{{asset('public/')}}/{{$sld->name}}" alt=""></a>
+          @endforeach
         </div>
 
       </div>
@@ -627,14 +624,14 @@ $slide = Slide::get();
           </div>
 
           <div class="col-lg-6">
-            <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+            <form  method="post" role="form" class="php-email-form">
               <div class="form-row">
                 <div class="col form-group">
                   <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
                   <div class="validate"></div>
                 </div>
                 <div class="col form-group">
-                  <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email" />
+                  <input type="email" class="form-control" name="nemail" id="email" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email" />
                   <div class="validate"></div>
                 </div>
               </div>
@@ -651,15 +648,34 @@ $slide = Slide::get();
                 <div class="error-message"></div>
                 <div class="sent-message">Your message has been sent. Thank you!</div>
               </div>
-              <div class="text-center"><button type="submit">Send Message</button></div>
+              <div class="text-center"><button type="button" class="sendmessage">Send Message</button></div>
             </form>
           </div>
 
         </div>
 
       </div>
+      
     </section><!-- End Contact Section -->
-
+<div class="modal fade" id="validationModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Form Validation Error</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <ul class="valid-body">
+              
+            </ul>
+            
+          </div>
+          
+        </div>
+      </div>
+    </div>
   </main><!-- End #main -->
 
 @endsection

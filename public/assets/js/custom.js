@@ -14,6 +14,7 @@ $(".loginusingotp a").click(function(){
 var apiendpoint = 'http://localhost/hospital2/api/'; 
 var siteurl = 'http://localhost/hospital2/'; 
 
+
 function storeData(data,url){
 
 	$.ajax({
@@ -513,6 +514,35 @@ $(".makeactive i").click(function(){
 
 })
 
+$(".fmlyactive i").click(function(){
+	
+	var id = $(this).attr('data-id');
+	var status = $(this).attr('data-status');
+
+	var data = {id:id,status:status};
+
+	$.ajax({
+          url: apiendpoint+'admin/familystatus/'+id+'/'+status,
+          type: "get",
+          headers: {
+                      'Accept': 'application/json',
+                      'Authorization': 'Bearer '+localStorage.getItem('ff_token'),
+          },
+          processData: false,
+          data:{},
+          async:false,
+        }).done(function(res) {
+        	
+        	if(res.status == 'success'){
+        		
+        		location.reload();
+        		
+        	}
+        	
+        })
+
+})
+
 $(".makeactivestore i").click(function(){
 	
 	var id = $(this).attr('data-id');
@@ -627,6 +657,46 @@ $(".makeactivelaboratory i").click(function(){
         })
 
 })
+$(".sendmessage").click(function(){
+
+	$('.valid-body').html('');
+	var vdata = $('form').serializeArray();
+
+	var html = '';
+	var val = [];
+	for (const key of  vdata){
+		if(key.value == "" && key.name != 'email'){
+			val.push(key.value);
+			html += '<li>'+key.name+' is requeired!</li>';
+		}
+		
+	}
+	if(val.length > 0){
+		$('.valid-body').html(html);
+		$('#validationModal').modal('show');
+		return false;
+	}
+
+	var data = $('form').serialize();
+	$.ajax({
+            url: apiendpoint+'contact',
+            type: "post",
+            headers: {
+                        'Accept': 'application/json',
+                        'Authorization': 'Bearer '+localStorage.getItem('ff_token'),
+            },
+            data:data,
+            async:false,
+          }).done(function(res) {
+          	
+          	if(res.status == 'success'){
+          		alert('Thank you. we will contact you soon');
+          		
+          	}
+          	
+          })
+	
+})
 
 $(".createslide").click(function(){
 
@@ -707,7 +777,35 @@ $(".editslide").click(function(){
           })
 	
 })
-											
+
+$(".deleteimage").click(function(){
+
+	var id = $(this).attr('data-id');
+
+	$.ajax({
+          url: apiendpoint+'admin/deleteimage/'+id,
+          type: "get",
+          headers: {
+                      'Accept': 'application/json',
+                      'Authorization': 'Bearer '+localStorage.getItem('ff_token'),
+          },
+          processData: false,
+          data:{},
+          async:false,
+        }).done(function(res) {
+        	
+        	if(res.status == 'success'){
+        		
+        		location.reload();
+        		
+        	}
+        	
+        })
+	
+})
+
+
+										
 function readFile() {
   
   if (this.files && this.files[0]) {
@@ -750,7 +848,55 @@ function readFile() {
   
 }
 
+
 document.getElementById("inp").addEventListener("change", readFile);
+
+function readFile2() {
+  
+  if (this.files && this.files[0]) {
+    
+    var FR= new FileReader();
+    
+    FR.addEventListener("load", function(e) {
+     
+       $(".attachimage").val(e.target.result)
+
+      var data = $('form').serialize();
+
+    console.log(data);
+
+      $.ajax({
+            url: apiendpoint+'admin/uploadimage',
+            type: "post",
+            headers: {
+                        'Accept': 'application/json',
+                        'Authorization': 'Bearer '+localStorage.getItem('ff_token'),
+            },
+            processData: false,
+            data:data,
+            async:false,
+          }).done(function(res) {
+            
+            if(res.status == 'success'){
+              
+              location.reload();
+              
+            }
+            
+          })
+
+
+    }); 
+    
+    FR.readAsDataURL( this.files[0] );
+  }
+  
+}
+
+$(document).ready(function(){
+
+	document.getElementById("inp2").addEventListener("change", readFile2);
+})
 
 
 

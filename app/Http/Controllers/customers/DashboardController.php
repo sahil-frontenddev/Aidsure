@@ -148,9 +148,9 @@ class DashboardController extends Controller
     public function createorder(Request $request){
 
         $order = new Order();
-
+        $user_unique_id = Auth::user()->unique_number;
         $order->tablets = $request->tablets;
-        $order->center_id = 0;
+        $order->center_id = $user_unique_id;
         $order->capsules = $request->capsules;
         $order->syrup = $request->syrup;
         $order->injection = $request->injection;
@@ -199,6 +199,19 @@ class DashboardController extends Controller
         $user->save();
 
         return (new Response(['status'=>'success','msg'=>'Success!'], '200'));
+
+    }
+
+        public function orderview($id){
+        $centers = Order::where('id',$id)->first();
+         if(Auth::check() && Auth::user()->role == "customer") {
+
+               return view('customers.orderview',['center'=>$centers]);
+            }
+            else{
+
+                return View('customers.login');
+            }
 
     }
     

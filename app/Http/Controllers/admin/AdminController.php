@@ -8,6 +8,7 @@ use Illuminate\Http\Response;
 use Auth;
 use Validator;
 use Hash;
+use Intervention\Image\ImageManagerStatic as Image;
 use App\Models\User;
 use App\Models\Center;
 use App\Models\Hospital;
@@ -15,6 +16,8 @@ use App\Models\Order;
 use App\Models\Laboratory;
 use App\Models\Medicalstore;
 use App\Models\Slide;
+use App\Models\Family;
+use App\Models\Gallery;
 
 class AdminController extends Controller
 {
@@ -453,4 +456,96 @@ class AdminController extends Controller
             }
 
     }
+
+    public function changepassword(){
+        if(Auth::check() && Auth::user()->role == "admin") {
+
+             return view('admin.changepassword');
+        }
+        else{
+
+            return View('admin.login');
+        }
+    }
+
+    public function family(){
+        $family = Family::with('getmembers')->get();
+        
+        if(Auth::check() && Auth::user()->role == "admin") {
+
+             return view('admin.family',['family'=>$family]);
+        }
+        else{
+
+            return View('admin.login');
+        }
+        
+    }
+    public function viewfamily($id){
+        $family = Family::where('id',$id)->with('getmembers')->first();
+        // print_r($family);
+        
+        // $pdf = PDF::loadView('customers.viewfamily',compact('family'));
+        //     return $pdf->download('pdfview.pdf');
+
+        if(Auth::check() && Auth::user()->role == "admin") {
+
+             return view('admin.viewfamily',['family'=>$family]);
+        }
+        else{
+
+            return View('customers.login');
+        }
+        
+    }
+    public function familystatus($id,$status){
+
+        $hospital = Family::find($id);
+
+        $hospital->status = $status;
+
+        $hospital->save();
+
+        return (new Response(['status'=>'success'], '200'));
+
+    }
+
+    public function gallery(){
+        $gallery = Gallery::get();
+        
+        if(Auth::check() && Auth::user()->role == "admin") {
+
+             return view('admin.gallery',['gallery'=>$gallery]);
+        }
+        else{
+
+            return View('customers.login');
+        }
+        
+    }
+
+    public function uploadimage(Request $request){
+
+            $imagename = uniqid().'.png';
+            $img = Image::make( $request->attachimage); 
+            $img->save(public_path().'/'.$imagename); 
+
+            $galllery = new Gallery();
+            $galllery->name = $imagename;
+            $galllery->save();
+            return response()->json([
+                'status' => 'success',
+                'image'=>$imagename
+            ]);
+    }
+
+    public function deleteimage($id){
+
+            Gallery::find($id)->delete();
+            return response()->json([
+                'status' => 'success'
+                
+            ]);
+    }
+
 }

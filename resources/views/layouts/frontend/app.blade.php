@@ -61,15 +61,15 @@
 
       <nav class="nav-menu d-none d-lg-block">
         <ul>
-          <li class="active"><a href="index.html">Home</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#services">Services</a></li>
-          <li><a href="#departments">Departments</a></li>
-          <li><a href="#doctors">Doctors</a></li>
+          <li class="active"><a href="{{url('/')}}">Home</a></li>
+          <li><a href="{{url('/about-us')}}">About</a></li>
+          <li><a href="{{url('/hospitals')}}">Hospitals</a></li>
+          <li><a href="{{url('/medical-stores')}}">Medical Stores</a></li>
+          <li><a href="{{url('/laboratories')}}">Laboratories</a></li>
+          <li><a href="{{url('/')}}#contact">Contact</a></li>
           <li class="drop-downs"><a href="{{route('customer_login')}}">Login</a>
           
         </li>
-          <li><a href="#contact">Contact</a></li>
 
         </ul>
       </nav><!-- .nav-menu -->
