@@ -3,13 +3,15 @@
 <head>
     <meta charset="utf-8">
     <title>AIDSURE</title>
-      <script src="{{asset('public/assets/vendor/jquery/jquery.min.js')}}"></script>
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<link href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css" rel="stylesheet" id="bootstrap-css">
-  <link href="{{asset('public/assets/css/custom.css')}}" rel="stylesheet">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="{{asset('public/assets/vendor/jquery/jquery.min.js')}}"></script>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css" rel="stylesheet" id="bootstrap-css">
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/css/bootstrap-select.min.css">
+      <link href="{{asset('public/assets/css/custom.css')}}" rel="stylesheet">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/bootstrap-select.min.js"></script>
 
-<script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
 
 </head>
 <body>
@@ -30,7 +32,8 @@
                 <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="https://bryanrojasq.wordpress.com">
-                <img src="{{asset('public/assets/img/logo.png')}}" style="width: 170px;" alt="LOGO">
+                <!-- <img src="{{asset('public/assets/img/logo.png')}}" style="width: 170px;" alt="LOGO"> -->
+                <h2>AIDSURE</h2>
             </a>
         </div>
         <!-- Top Menu Items -->
@@ -234,6 +237,11 @@
 }
 .collapse.navbar-collapse.navbar-ex1-collapse, ul.nav.navbar-nav.side-nav {
     background: red;
+}
+a.navbar-brand h2 {
+    color: #fff;
+    margin-top: 10px;
+    font-weight: bold;
 }
 </style>
 <!-- <script type="text/javascript">

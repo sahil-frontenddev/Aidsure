@@ -26,13 +26,13 @@
                       <td>{{$item->phone}}</td>
                       <td>{{count($item->getmembers)}}</td>
                       <td>{{$item->status}}</td>
-                    
                       <td class="fmlyactive">
-                        <a href="{{url('/admin/viewfamily')}}/{{$item->id}}"><i class="fa fa-eye"></i></a>
-                         @if($item->status == 'approve')
-                         <i class="fa fa-star active" data-id="{{$item->id}}" data-status="not-approve"/>
+                        <a href="{{url('/admin/viewfamily')}}/{{$item->id}}" data-status="not-approve" data-toggle="tooltip" data-placement="top" title="View Family"><i class="fa fa-eye"></i></a>
+                        @if($item->status == 'approve')
+                        <i class="fa fa-star active" data-id="{{$item->id}}" data-status="approve" data-status="not-approve" data-toggle="tooltip" data-placement="top" title="Click To Not approve"/>
+                         
                         @else
-                         <i class="fa fa-star" data-id="{{$item->id}}" data-status="approve"/>
+                          <i class="fa fa-star" data-id="{{$item->id}}" data-status="not-approve" data-status="not-approve" data-toggle="tooltip" data-placement="top" title="Click To approve"/>
                         @endif
                       </td>
                      

@@ -20,6 +20,7 @@ Route::post('customer/login', 'App\Http\Controllers\customers\LoginController@lo
 Route::post('admin/login', 'App\Http\Controllers\admin\LoginController@login');
 Route::post('admin/logout', 'App\Http\Controllers\admin\LoginController@Logout');
 Route::post('contact', 'App\Http\Controllers\HomeController@contact');
+Route::get('testroutewsd', 'App\Http\Controllers\HomeController@testroutewsd');
 
 Route::middleware('auth:api')->group(function () {
 
@@ -30,10 +31,12 @@ Route::get('admin/add', 'App\Http\Controllers\customers\AdminController@users');
 // Centers
 
 Route::post('admin/addcenters', 'App\Http\Controllers\admin\AdminController@addcenters');
+Route::post('admin/addnewuser', 'App\Http\Controllers\admin\AdminController@addnewuser');
 Route::get('admin/deletecenters', 'App\Http\Controllers\admin\AdminController@deletecenters');
 Route::get('admin/hospitalstatus/{id}/{status}', 'App\Http\Controllers\admin\AdminController@hospitalstatus');
 Route::get('admin/centerstatus/{id}/{status}', 'App\Http\Controllers\admin\AdminController@centerstatus');
 Route::get('admin/orderstatus/{id}/{status}', 'App\Http\Controllers\admin\AdminController@orderstatus');
+
 Route::get('admin/medicalstorestatus/{id}/{status}', 'App\Http\Controllers\admin\AdminController@medicalstorestatus');
 Route::get('admin/laboratorystatus/{id}/{status}', 'App\Http\Controllers\admin\AdminController@laboratorystatus');
 Route::get('admin/familystatus/{id}/{status}', 'App\Http\Controllers\admin\AdminController@familystatus');
@@ -49,9 +52,13 @@ Route::post('admin/editslide', 'App\Http\Controllers\admin\AdminController@edits
 Route::post('admin/uploadimage', 'App\Http\Controllers\admin\AdminController@uploadimage');
 
 Route::post('customer/createfamily', 'App\Http\Controllers\customers\DashboardController@createfamily');
+Route::post('customer/createmember', 'App\Http\Controllers\customers\DashboardController@createmember');
 Route::post('customer/createorder', 'App\Http\Controllers\customers\DashboardController@createorder');
+Route::post('customer/editorderapi', 'App\Http\Controllers\customers\DashboardController@editorderapi');
 Route::post('uploadimage', 'App\Http\Controllers\customers\DashboardController@uploadimage');
 Route::post('changepassword', 'App\Http\Controllers\customers\DashboardController@newchangepassword');
+
+Route::get('admin/deleteorder/{id}/{status}', 'App\Http\Controllers\customers\DashboardController@deleteorder');
 
 
 });

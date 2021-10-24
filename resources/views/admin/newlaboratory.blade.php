@@ -24,7 +24,7 @@
                 <input type="text" name="speciality" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Speciality">
               </div>
               <div class="form-group col-md-6">
-                <label for="exampleInputEmail1">Doctors Name</label>
+                <label for="exampleInputEmail1">Lab Technician Name</label>
                 <input type="text" name="doctor_name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Name">
               </div>
             </div>
@@ -51,7 +51,7 @@
             </div> 
             <div class="col-md-12">
               <div class="form-group col-md-6"> 
-                <button type="button" class="btn btn-primary createlaboratory">Create</button>
+                <button type="button" class="btn btn-primary createlaboratory">Add Laboratory</button>
               </div>
             </div>  
           </form>

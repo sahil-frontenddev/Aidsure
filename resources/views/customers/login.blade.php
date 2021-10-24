@@ -6,6 +6,7 @@
 
       <section class="customer_login" >
           <form>
+              @csrf
             <div class="loginusingemail">
               <div class="form-group">
                 <label for="exampleInputEmail1">Email address</label>

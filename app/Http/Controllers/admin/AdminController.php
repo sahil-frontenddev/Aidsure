@@ -24,9 +24,16 @@ class AdminController extends Controller
     public function __construct()
     {
 
-        if(Auth::check() && Auth::user()->role == "admin") {
+        if(Auth::check() && Auth::user() != null) {
+            
+            if(Auth::user()->role == "admin" || Auth::user()->role == "subadmin"){
+                return View('admin.dashboard');
+            }
+            else{
+                return View('admin.login');
+            }
 
-            return View('admin.dashboard');
+            
         }
         else{
 
@@ -36,7 +43,7 @@ class AdminController extends Controller
     }
     public function index(){
 
-        $users = User::where('role','admin')->get();
+        $users = User::whereIn('role',['admin','subadmin'])->get();
 
         if(Auth::check() && Auth::user()->role == "admin") {
 
@@ -52,9 +59,16 @@ class AdminController extends Controller
 
     public function dashboard(){
         
-        if(Auth::check() && Auth::user()->role == "admin") {
+        if(Auth::check() && Auth::user() != null) {
+            
+            if(Auth::user()->role == "admin" || Auth::user()->role == "subadmin"){
+                return View('admin.dashboard');
+            }
+            else{
+                return View('admin.login');
+            }
 
-            return View('admin.dashboard');
+            
         }
         else{
 
@@ -85,11 +99,21 @@ class AdminController extends Controller
             return View('admin.login');
         }
 
-     return view('admin.newcenters');
+       return view('admin.newcenters');
     }
 
     public function addcenters(Request $request){
+        
+        $input['email'] = $request->youremail;
+        $input['phone'] = $request->phone;
+        
+        $rules = array('email' => 'email','phone' => 'required|size:10');
 
+        $validator = Validator::make($input, $rules);
+        // print_r($validator->errors()->first()); die;
+        if ($validator->fails()) {
+            return (new Response(['status'=>'error','msg'=>$validator->errors()->first()], '200'));
+        }
         $user = new User();
         $user->name = $request->username;
         $user->email = $request->youremail;
@@ -134,7 +158,18 @@ class AdminController extends Controller
     }
 
     public function addnewhospital(Request $request){
+        
+        $input['email'] = $request->youremail;
+        $input['phone'] = $request->phone;
+        
+        $rules = array('email' => 'email','phone' => 'required|size:10');
 
+        $validator = Validator::make($input, $rules);
+        // print_r($validator->errors()->first()); die;
+        if ($validator->fails()) {
+            return (new Response(['status'=>'error','msg'=>$validator->errors()->first()], '200'));
+        }
+        
         $user = new Hospital();
         $user->name = $request->username;
         $user->email = $request->youremail;
@@ -156,9 +191,9 @@ class AdminController extends Controller
     }
 
     public function orders(){
-        $family = Order::orderby('id','desc')->get();
+        $family = Order::where('order_status','active')->orderby('id','desc')->get();
 
-        if(Auth::check() && Auth::user()->role == "admin") {
+        if(Auth::check() && Auth::user()->role == "admin"  || Auth::user()->role == "subadmin") {
 
             return view('admin.orders',['family'=>$family]);
         }
@@ -196,12 +231,26 @@ class AdminController extends Controller
     public function orderstatus($id,$status){
 
         $order = Order::find($id);
-
+        $user = User::find($order->user_id);
         $order->status = $status;
 
-        $order->save();
-
-        return (new Response(['status'=>'success'], '200'));
+        if($order->save()){
+            $msg = 'You Order is '.$status;
+            $msg = wordwrap($msg,70);
+            
+            $header = "FROM: ".Auth::user()->name." <".Auth::user()->email.">\r\n";
+     
+            if(mail($user->email,'Order Status',$msg,$header)){
+                return (new Response(['status'=>'success'], '200'));
+            }else{
+                return (new Response(['status'=>'error'], '200'));
+            }
+        }
+        else{
+            
+            return (new Response(['status'=>'error'], '200'));
+        }
+      
 
     }
 
@@ -254,6 +303,19 @@ class AdminController extends Controller
     }
 
     public function addnewlaboratory(Request $request){
+        
+        $input['email'] = $request->youremail;
+        $input['phone'] = $request->phone;
+        
+        $rules = array('email' => 'email','phone' => 'required|size:10');
+
+
+        $validator = Validator::make($input, $rules);
+        // print_r($validator->errors()->first()); die;
+        if ($validator->fails()) {
+            return (new Response(['status'=>'error','msg'=>$validator->errors()->first()], '200'));
+        }
+        
 
         $user = new Laboratory();
         $user->name = $request->username;
@@ -301,7 +363,18 @@ class AdminController extends Controller
     }
 
     public function addnewmedicalstore(Request $request){
+        
+        $input['email'] = $request->youremail;
+        $input['phone'] = $request->phone;
+        
+        $rules = array('email' => 'email','phone' => 'required|size:10');
 
+        $validator = Validator::make($input, $rules);
+        // print_r($validator->errors()->first()); die;
+        if ($validator->fails()) {
+            return (new Response(['status'=>'error','msg'=>$validator->errors()->first()], '200'));
+        }
+        
         $user = new Medicalstore();
         $user->name = $request->username;
         $user->email = $request->youremail;
@@ -446,7 +519,7 @@ class AdminController extends Controller
     }
     public function orderview($id){
         $centers = Order::where('id',$id)->first();
-         if(Auth::check() && Auth::user()->role == "admin") {
+         if(Auth::check() && Auth::user()->role == "admin"  || Auth::user()->role == "subadmin") {
 
                return view('admin.orderview',['center'=>$centers]);
             }
@@ -471,7 +544,7 @@ class AdminController extends Controller
     public function family(){
         $family = Family::with('getmembers')->get();
         
-        if(Auth::check() && Auth::user()->role == "admin") {
+        if(Auth::check() && Auth::user()->role == "admin"  || Auth::user()->role == "subadmin") {
 
              return view('admin.family',['family'=>$family]);
         }
@@ -488,7 +561,7 @@ class AdminController extends Controller
         // $pdf = PDF::loadView('customers.viewfamily',compact('family'));
         //     return $pdf->download('pdfview.pdf');
 
-        if(Auth::check() && Auth::user()->role == "admin") {
+        if(Auth::check() && Auth::user()->role == "admin"  || Auth::user()->role == "subadmin") {
 
              return view('admin.viewfamily',['family'=>$family]);
         }
@@ -546,6 +619,50 @@ class AdminController extends Controller
                 'status' => 'success'
                 
             ]);
+    }
+
+    public function newuser(){
+        if(Auth::check() && Auth::user()->role == "admin") {
+
+            return View('admin.addnewuser');
+        }
+        else{
+
+            return View('admin.login');
+        }
+
+    }
+
+    public function addnewuser(Request $request){
+        
+        $input['email'] = $request->youremail;
+        $input['phone'] = $request->phone;
+        
+        $rules = array('email' => 'email','phone' => 'required|size:10');
+
+        $validator = Validator::make($input, $rules);
+        // print_r($validator->errors()->first()); die;
+        if ($validator->fails()) {
+            return (new Response(['status'=>'error','msg'=>$validator->errors()->first()], '200'));
+        }
+
+        $user = new User();
+        $user->name = $request->username;
+        $user->email = $request->youremail;
+        $user->city = $request->city;
+        $user->state = $request->state;
+        $user->phone = $request->phone;
+        $user->address = $request->address;
+        $user->password = Hash::make($request->password);
+        $user->role = 'subadmin';
+
+        if($user->save()){
+           
+            return (new Response(['status'=>'success'], '200'));
+        }
+        else{
+            return (new Response(['status'=>'error','msg'=>'Registration failed!'], '200'));
+        }
     }
 
 }

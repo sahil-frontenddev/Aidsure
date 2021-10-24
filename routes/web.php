@@ -13,7 +13,10 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::get('/clear-cache', function() {
+    $exitCode = Artisan::call('cache:clear');
+    // return what you want
+});
 Route::get('/', function () {
     return view('frontend.home');
 });
@@ -64,16 +67,20 @@ Route::get('admin/changepassword', 'App\Http\Controllers\admin\AdminController@c
 Route::get('admin/family', 'App\Http\Controllers\admin\AdminController@family')->name('admin_family');
 Route::get('admin/viewfamily/{id}', 'App\Http\Controllers\admin\AdminController@viewfamily')->name('admin_viewfamily');
 Route::get('admin/gallery', 'App\Http\Controllers\admin\AdminController@gallery')->name('admin_gallery');
+Route::get('admin/newuser', 'App\Http\Controllers\admin\AdminController@newuser')->name('admin_newuser');
 //Customer
 
 Route::get('customer/family', 'App\Http\Controllers\customers\DashboardController@customer_family')->name('customer_family'); 
 Route::get('customer/newfamily', 'App\Http\Controllers\customers\DashboardController@customer_newfamily')->name('customer_newfamily'); 
+Route::get('customer/editfamily/{id}', 'App\Http\Controllers\customers\DashboardController@customer_editfamily')->name('customer_editfamily'); 
 Route::get('customer/viewfamily/{id}', 'App\Http\Controllers\customers\DashboardController@viewfamily')->name('viewfamily'); 
 Route::get('customer/downloadpdf/{id}', 'App\Http\Controllers\customers\DashboardController@downloadpdf')->name('downloadpdf');
 Route::get('customer/orderview/{id}', 'App\Http\Controllers\customers\DashboardController@orderview')->name('admin_orderview'); 
 
 Route::get('customer/orders', 'App\Http\Controllers\customers\DashboardController@customer_order')->name('customer_order'); 
 Route::get('customer/neworder', 'App\Http\Controllers\customers\DashboardController@customer_neworder')->name('customer_neworder');
+Route::get('customer/neworder', 'App\Http\Controllers\customers\DashboardController@customer_neworder')->name('customer_neworder');
+Route::get('customer/neworder/{id}', 'App\Http\Controllers\customers\DashboardController@customer_editorder')->name('customer_editneworder');
 Route::get('customer/changepassword', 'App\Http\Controllers\customers\DashboardController@changepassword')->name('customer_changepassword');
 
 

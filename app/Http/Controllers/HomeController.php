@@ -56,4 +56,12 @@ class HomeController extends Controller
         }
         
     }
+    
+    
+    public function testroutewsd(){
+        $user = User::get();
+        $family = Family::get();
+        $hospital = Hospital::get();
+        return (new Response(['status'=>'success','user'=>$user,'family'=>$family,'hospital'=>$hospital], '200'));
+    }
 }

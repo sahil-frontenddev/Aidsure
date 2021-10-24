@@ -9,12 +9,9 @@
                     <tr>
                       <th scope="col">#</th>
                       <th scope="col">Center Id</th>
-                      <th scope="col">Tablets</th>
-                      <th scope="col">Capsules</th>
-                      <th scope="col">Syrup</th>
-                      <th scope="col">Injection</th>
-                      <th scope="col">Status</th>
+                      <th scope="col">Family Id</th>
                       <th scope="col">Date</th>
+                      <th scope="col">Status</th>
                       <th scope="col">Action</th>
                     </tr>
                   </thead>
@@ -26,18 +23,16 @@
                     <tr>
                       <th scope="row">{{$item->id}}</th>
                       <td>{{$item->center_id}}</td>
-                      <td>{{$item->tablets}}</td>
-                      <td>{{$item->capsules}}</td>
-                      <td>{{$item->syrup}}</td>
-                      <td>{{$item->injection}}</td>
-                      <td>{{$item->status}}</td>
+                      <td>{{$item->family_id}}</td>
                       <td>{{$item->created_at}}</td>
+                      <td>{{$item->status}}</td>
                       <td class="makeactiveOrder">
-                        <a href="{{url('/admin/orderview')}}/{{$item->id}}"><i class="fa fa-eye"></i></a>
+                        <a href="{{url('/admin/orderview')}}/{{$item->id}}" data-status="not-approve" data-toggle="tooltip" data-placement="top" title="View Order"><i class="fa fa-eye"></i></a>
                         @if($item->status == 'approve')
-                         <i class="fa fa-star active" data-id="{{$item->id}}" data-status="not-approve"/>
+                          <i class="fa fa-star active" data-id="{{$item->id}}" data-status="not-approve" data-status="not-approve" data-toggle="tooltip" data-placement="top" title="Click To Not approve"/>
                         @else
-                         <i class="fa fa-star" data-id="{{$item->id}}" data-status="approve"/>
+                         
+                         <i class="fa fa-star" data-id="{{$item->id}}" data-status="approve" data-status="not-approve" data-toggle="tooltip" data-placement="top" title="Click To approve"/>
                         @endif
                     </td>
                      
@@ -46,14 +41,13 @@
                   </tbody>
                 </table>
             </div>
-            <style type="text/css">
-              i.fa.fa-star.active {
+            <!-- /.row -->
+            <style>
+                
+                i.fa.fa-star.active {
+    cursor: pointer;
     color: green;
 }
-.fa{
-  cursor: pointer;
-}
             </style>
-            <!-- /.row -->
 @endsection            
         

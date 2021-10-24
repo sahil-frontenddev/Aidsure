@@ -51,7 +51,7 @@
             </div> 
             <div class="col-md-12">
               <div class="form-group col-md-6">
-                <button type="button" class="btn btn-primary createcenter">Register</button>
+                <button type="button" class="btn btn-primary createcenter">Add Center</button>
               </div>
             </div>  
           </form>

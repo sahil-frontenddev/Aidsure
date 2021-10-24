@@ -13,6 +13,7 @@ class Family extends Model
     protected $fillable = [
         'rnf',
         'family_id',
+        'user_id',
         'st_address',
         'city',
         'state',

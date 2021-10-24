@@ -13,12 +13,14 @@ use App\Models\User;
 use App\Models\Postalcodes;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use AuthenticatesUsers;
+use App\Providers\RouteServiceProvider;
 
 class LoginController extends Controller
 {
     
     public function index(){
-
+   
   
     // foreach ($data as $item){
     //     if($item->stateISO != "ON"){ 
@@ -30,7 +32,7 @@ class LoginController extends Controller
     //         $createpostalcode->save();
     //     }   
     //     }
-
+        
         if(Auth::check() && Auth::user()->role == "customer") {
             return View('customers.dashboard');
         }
@@ -49,10 +51,21 @@ class LoginController extends Controller
         $login_credentials=[
             'email'=>$request->useremail,
             'password'=>$request->userpassword,
+            // '_token'=>$request->_token,
+            
         ];
-        if(auth()->attempt($login_credentials)){
+        
+        $checkuser = User::where('email',$request->useremail)->first();
+        
+        if($checkuser->status != 'approve'){
+            return (new Response(['status'=>'error','msg'=>'Your Account is not active!'], '200'));
+        }
+        
+       if (Auth::guard('web')->attempt($login_credentials, false, false)) {
             //generate the token for the user
             $user = Auth::user();
+            // Session::save();
+            // dd($user);
             $user_login_token = $user->createToken('MyApp')->accessToken;
             return (new Response(['status'=>'success','token'=>$user_login_token], '200'));
            } 

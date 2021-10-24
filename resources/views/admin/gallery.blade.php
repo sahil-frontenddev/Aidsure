@@ -58,5 +58,56 @@
     cursor: pointer;
 }
 </style>
+<script>
+    
+    function readFile2() {
+  
+  if (this.files && this.files[0]) {
+    
+    var FR= new FileReader();
+    
+    FR.addEventListener("load", function(e) {
+     
+       $(".attachimage").val(e.target.result)
+
+      var data = $('form').serialize();
+
+    console.log(data);
+
+      $.ajax({
+            url: apiendpoint+'admin/uploadimage',
+            type: "post",
+            headers: {
+                        'Accept': 'application/json',
+                        'Authorization': 'Bearer '+localStorage.getItem('ff_token'),
+            },
+            processData: false,
+            data:data,
+            async:false,
+          }).done(function(res) {
+            
+            if(res.status == 'success'){
+              
+              location.reload();
+              
+            }
+            
+          })
+
+
+    }); 
+    
+    FR.readAsDataURL( this.files[0] );
+  }
+  
+}
+
+$(document).ready(function(){
+
+	document.getElementById("inp2").addEventListener("change", readFile2);
+})
+
+    
+</script>
 @endsection            
         

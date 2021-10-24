@@ -8,11 +8,12 @@ $(".loginusingotp a").click(function(){
 	$(".loginusingotp").hide();
 })
 
-// var apiendpoint = 'http://aidsure.live/api/'; 
-// var siteurl = 'http://aidsure.live/hospital2/'; 
+// var apiendpoint = 'http://localhost/hospital2/api/'; 
+// var siteurl = 'http://localhost/hospital2/'; 
 
-var apiendpoint = 'http://localhost/hospital2/api/'; 
-var siteurl = 'http://localhost/hospital2/'; 
+var apiendpoint = 'http://aidsure.live/api/'; 
+var siteurl = 'http://aidsure.live/'; 
+
 
 
 function storeData(data,url){
@@ -34,7 +35,7 @@ function storeData(data,url){
           	else{
           		// alert(res.msg);
           		$('.valid-body').html('<li>'+res.msg+'</li>');
-							$('#validationModal').modal('show');
+						$('#validationModal').modal('show');
           	}
           })
 }
@@ -89,10 +90,92 @@ function loginadmin(data,url){
           	else{
           		
           		$('.valid-body').html('<li>'+res.msg+'</li>');
-				$('#validationModal').modal('show');
+							$('#validationModal').modal('show');
           	}
           })
 }
+
+$('.med').change(function (e) {
+    $(".medname").val(e.target.value);
+
+})
+$('.rnf').change(function (e) {
+ 
+
+	$.ajax({
+            url: apiendpoint+'customer/createorder',
+            type: "post",
+            headers: {
+                        'Accept': 'application/json',
+                        'Authorization': 'Bearer '+localStorage.getItem('ff_token'),
+            },
+            processData: false,
+            data:$('form').serialize(),
+            async:false,
+          }).done(function(res) {
+          	
+          	if(res.status == 'success'){
+          		alert('Order created successfullly');
+          		location.href = siteurl+'customer/neworder/'+res.id;
+          	}
+          	else{
+          	    $('.valid-body').html('<li>'+res.msg+'</li>');
+							  $('#validationModal').modal('show');
+          	}
+          	
+          })
+
+});
+
+$(".addmedicine").click(function(){
+
+	var medicines = [];
+
+	var med = $(".medname").val();
+
+	var name = $(".name").val();
+
+	var quantity = $(".quantity").val();
+
+	var image =  $(".attachimage").val();
+	
+	if(med != "" && name != "" && quantity != "" && image != ""){
+		// medicines.push({med:med,name:name,quantity:quantity,image:image});
+
+		$.ajax({
+            url: apiendpoint+'customer/editorderapi',
+            type: "post",
+            headers: {
+                        'Accept': 'application/json',
+                        'Authorization': 'Bearer '+localStorage.getItem('ff_token'),
+            },
+            processData: false,
+            data:$('form').serialize(),
+            async:false,
+          }).done(function(res) {
+          	
+          	if(res.status == 'success'){
+          		
+          		location.reload();
+          	}
+          	else{
+          	    $('.valid-body').html('<li>'+res.msg+'</li>');
+							  $('#validationModal').modal('show');
+          	}
+          	
+          })
+	}
+
+	else{
+		$('.valid-body').html('<li>Please fill the all fields!</li>');
+		$('#validationModal').modal('show');
+			
+	}
+
+
+
+
+})
 
 $(".adminlogin").click(function(){
 
@@ -120,7 +203,7 @@ $(".logout").click(function(){
           	else{
           		
           		$('.valid-body').html('<li>'+res.msg+'</li>');
-				$('#validationModal').modal('show');
+							$('#validationModal').modal('show');
           	}
           })
 	
@@ -183,6 +266,54 @@ $(".createcenter").click(function(){
           		alert('centers created successfullly');
           		location.href = siteurl+'admin/centers';
           	}
+          	else{
+          	    $('.valid-body').html('<li>'+res.msg+'</li>');
+							  $('#validationModal').modal('show');
+          	}
+          	
+          })
+	
+})
+
+$(".createuser").click(function(){
+
+	$('.valid-body').html('');
+	var vdata = $('form').serializeArray();
+	var html = '';
+	var val = [];
+	for (const key of  vdata){
+		if(key.value == "" && key.name != 'email'){
+			val.push(key.value);
+			html += '<li>'+key.name+' is requeired!</li>';
+		}
+		
+	}
+	if(val.length > 0){
+		$('.valid-body').html(html);
+		$('#validationModal').modal('show');
+		return false;
+	}
+
+	var data = $('form').serialize();
+	$.ajax({
+            url: apiendpoint+'admin/addnewuser',
+            type: "post",
+            headers: {
+                        'Accept': 'application/json',
+                        'Authorization': 'Bearer '+localStorage.getItem('ff_token'),
+            },
+            data:data,
+            async:false,
+          }).done(function(res) {
+          	
+          	if(res.status == 'success'){
+          		alert('User created successfullly');
+          		location.href = siteurl+'admin/users';
+          	}
+          	else{
+          	   $('.valid-body').html('<li>'+res.msg+'</li>');
+							 $('#validationModal').modal('show');
+          	}
           	
           })
 	
@@ -222,6 +353,10 @@ $(".createhospital").click(function(){
           	if(res.status == 'success'){
           		alert('Hospital created successfullly');
           		location.href = siteurl+'admin/hospitals';
+          	}
+          	else{
+          	   $('.valid-body').html('<li>'+res.msg+'</li>');
+							 $('#validationModal').modal('show');
           	}
           	
           })
@@ -303,6 +438,10 @@ $(".createstore").click(function(){
           		alert('Medical Store created successfullly');
           		location.href = siteurl+'admin/medicalstores';
           	}
+          	else{
+          	    $('.valid-body').html('<li>'+res.msg+'</li>');
+							  $('#validationModal').modal('show');
+          	}
           	
           })
 	
@@ -317,45 +456,56 @@ $(".addmore").click(function(){
 
 })
 
+$(".createmember").click(function(){
 
+	$('.valid-body').html('');
+	var vdata = $('form').serializeArray();
+	var html = '';
+	var val = [];
+	for (const key of  vdata){
+		if(key.value == "" && key.name != 'email'){
+			val.push(key.value);
+			html += '<li>'+key.name+' is requeired!</li>';
+		}
+		
+	}
+	if(val.length > 0){
+		$('.valid-body').html(html);
+		$('#validationModal').modal('show');
+		return false;
+	}
+
+	var data = $('form').serialize();
+
+	$.ajax({
+            url: apiendpoint+'customer/createmember',
+            type: "post",
+            headers: {
+                        'Accept': 'application/json',
+                        'Authorization': 'Bearer '+localStorage.getItem('ff_token'),
+            },
+            data:data,
+            async:false,
+          }).done(function(res) {
+          	
+          	if(res.status == 'success'){
+          		// alert('Family created successfullly');
+          		location.reload();
+          	}
+          	else{
+          	   $('.valid-body').html('<li>'+res.msg+'</li>');
+							 $('#validationModal').modal('show');
+          	}
+          	
+          })
+	
+})
 $(".createfamily").click(function(){
 	$('.valid-body').html('');
 	var html = '';
 	var val = [];
 	var val2 = [];
 	var val3 	 = [];
-
-	$(".fname").each(function(){
-		if($(this).val().length < 6){
-			val.push(1);
-		}
-	})
-	$(".adh").each(function(){
-		if($(this).val().length < 6){
-			val2.push(1);
-		}
-	})
-	$(".sign").each(function(){
-		if($(this).val().length < 6){
-			val3.push(1);
-		}
-	})
-
-	if(val.length > 0){
-		$('.valid-body').html('<li>Name Should Be minimum 6 character</li>');
-		$('#validationModal').modal('show');
-		return false;
-	}
-	if(val2.length > 0){
-		$('.valid-body').html('<li>Adhar Number Should Be minimum 6 character</li>');
-		$('#validationModal').modal('show');
-		return false;
-	}
-	if(val2.length > 0){
-		$('.valid-body').html('<li>Signature Should Be minimum 6 character</li>');
-		$('#validationModal').modal('show');
-		return false;
-	}
 
 	$('.valid-body').html('');
 	var vdata = $('form').serializeArray();
@@ -389,56 +539,64 @@ $(".createfamily").click(function(){
           	
           	if(res.status == 'success'){
           		alert('Family created successfullly');
-          		location.href = siteurl+'customer/family';
+          		location.href = siteurl+'customer/editfamily/'+res.id;
+          	}
+          	else{
+          	   $('.valid-body').html('<li>'+res.msg+'</li>');
+							 $('#validationModal').modal('show');
           	}
           	
           })
 	
 })
 
-$(".createorder").click(function(){
+// $(".createorder").click(function(){
 
-		$('.valid-body').html('');
-	var vdata = $('form').serializeArray();
-	var html = '';
-	var val = [];
-	for (const key of  vdata){
-		if(key.value == "" && key.name != 'email'){
-			val.push(key.value);
-			html += '<li>'+key.name+' is requeired!</li>';
-		}
+// 		$('.valid-body').html('');
+// 	var vdata = $('form').serializeArray();
+// 	var html = '';
+// 	var val = [];
+// 	for (const key of  vdata){
+// 		if(key.value == "" && key.name != 'email'){
+// 			val.push(key.value);
+// 			html += '<li>'+key.name+' is requeired!</li>';
+// 		}
 		
-	}
-	if(val.length > 0){
-		$('.valid-body').html(html);
-		$('#validationModal').modal('show');
-		return false;
-	}
+// 	}
+// 	if(val.length > 0){
+// 		$('.valid-body').html(html);
+// 		$('#validationModal').modal('show');
+// 		return false;
+// 	}
 
-	var data = $('form').serialize();
+// 	var data = $('form').serialize();
 
-	console.log(data);
+// 	console.log(data);
 
-	$.ajax({
-            url: apiendpoint+'customer/createorder',
-            type: "post",
-            headers: {
-                        'Accept': 'application/json',
-                        'Authorization': 'Bearer '+localStorage.getItem('ff_token'),
-            },
-            processData: false,
-            data:data,
-            async:false,
-          }).done(function(res) {
+// 	$.ajax({
+//             url: apiendpoint+'customer/createorder',
+//             type: "post",
+//             headers: {
+//                         'Accept': 'application/json',
+//                         'Authorization': 'Bearer '+localStorage.getItem('ff_token'),
+//             },
+//             processData: false,
+//             data:data,
+//             async:false,
+//           }).done(function(res) {
           	
-          	if(res.status == 'success'){
-          		alert('Order created successfullly');
-          		location.href = siteurl+'customer/orders';
-          	}
+//           	if(res.status == 'success'){
+//           		alert('Order created successfullly');
+//           		location.href = siteurl+'customer/orders';
+//           	}
+//           	else{
+//           	    $('.valid-body').html('<li>'+res.msg+'</li>');
+// 							  $('#validationModal').modal('show');
+//           	}
           	
-          })
+//           })
 	
-})
+// })
 
 $(".createlaboratory").click(function(){
 
@@ -479,6 +637,10 @@ $(".createlaboratory").click(function(){
           		alert('Laboratory created successfullly');
           		location.href = siteurl+'admin/laboratory';
           	}
+          	else{
+          	    $('.valid-body').html('<li>'+res.msg+'</li>');
+							  $('#validationModal').modal('show');
+          	}
           	
           })
 	
@@ -494,6 +656,35 @@ $(".makeactive i").click(function(){
 
 	$.ajax({
           url: apiendpoint+'admin/hospitalstatus/'+id+'/'+status,
+          type: "get",
+          headers: {
+                      'Accept': 'application/json',
+                      'Authorization': 'Bearer '+localStorage.getItem('ff_token'),
+          },
+          processData: false,
+          data:{},
+          async:false,
+        }).done(function(res) {
+        	
+        	if(res.status == 'success'){
+        		
+        		location.reload();
+        		
+        	}
+        	
+        })
+
+})
+
+$(".deleteorder").click(function(){
+	
+	var id = $(this).attr('data-id');
+	var status = $(this).attr('data-status');
+
+	var data = {id:id,status:status};
+
+	$.ajax({
+          url: apiendpoint+'admin/deleteorder/'+id+'/'+status,
           type: "get",
           headers: {
                       'Accept': 'application/json',
@@ -806,97 +997,97 @@ $(".deleteimage").click(function(){
 
 
 										
-function readFile() {
+// function readFile() {
   
-  if (this.files && this.files[0]) {
+//   if (this.files && this.files[0]) {
     
-    var FR= new FileReader();
+//     var FR= new FileReader();
     
-    FR.addEventListener("load", function(e) {
+//     FR.addEventListener("load", function(e) {
      
-       $(".attachimage").val(e.target.result)
+//       $(".attachimage").val(e.target.result)
 
-      var data = $('form').serialize();
+//       var data = $('form').serialize();
 
-		console.log(data);
+// 		console.log(data);
 
-      $.ajax({
-            url: apiendpoint+'uploadimage',
-            type: "post",
-            headers: {
-                        'Accept': 'application/json',
-                        'Authorization': 'Bearer '+localStorage.getItem('ff_token'),
-            },
-            processData: false,
-            data:data,
-            async:false,
-          }).done(function(res) {
+//       $.ajax({
+//             url: apiendpoint+'uploadimage',
+//             type: "post",
+//             headers: {
+//                         'Accept': 'application/json',
+//                         'Authorization': 'Bearer '+localStorage.getItem('ff_token'),
+//             },
+//             processData: false,
+//             data:data,
+//             async:false,
+//           }).done(function(res) {
           	
-          	if(res.status == 'success'){
+//           	if(res.status == 'success'){
           		
-          		$(".attachimage").val(res.image);
+//           		$(".attachimage").val(res.image);
           		
-          	}
+//           	}
           	
-          })
+//           })
 
 
-    }); 
+//     }); 
     
-    FR.readAsDataURL( this.files[0] );
-  }
+//     FR.readAsDataURL( this.files[0] );
+//   }
   
-}
+// }
 
 
-document.getElementById("inp").addEventListener("change", readFile);
+// document.getElementById("inp").addEventListener("change", readFile);
 
-function readFile2() {
+// function readFile2() {
   
-  if (this.files && this.files[0]) {
+//   if (this.files && this.files[0]) {
     
-    var FR= new FileReader();
+//     var FR= new FileReader();
     
-    FR.addEventListener("load", function(e) {
+//     FR.addEventListener("load", function(e) {
      
-       $(".attachimage").val(e.target.result)
+//       $(".attachimage").val(e.target.result)
 
-      var data = $('form').serialize();
+//       var data = $('form').serialize();
 
-    console.log(data);
+//     console.log(data);
 
-      $.ajax({
-            url: apiendpoint+'admin/uploadimage',
-            type: "post",
-            headers: {
-                        'Accept': 'application/json',
-                        'Authorization': 'Bearer '+localStorage.getItem('ff_token'),
-            },
-            processData: false,
-            data:data,
-            async:false,
-          }).done(function(res) {
+//       $.ajax({
+//             url: apiendpoint+'admin/uploadimage',
+//             type: "post",
+//             headers: {
+//                         'Accept': 'application/json',
+//                         'Authorization': 'Bearer '+localStorage.getItem('ff_token'),
+//             },
+//             processData: false,
+//             data:data,
+//             async:false,
+//           }).done(function(res) {
             
-            if(res.status == 'success'){
+//             if(res.status == 'success'){
               
-              location.reload();
+//               location.reload();
               
-            }
+//             }
             
-          })
+//           })
 
 
-    }); 
+//     }); 
     
-    FR.readAsDataURL( this.files[0] );
-  }
+//     FR.readAsDataURL( this.files[0] );
+//   }
   
-}
+// }
 
-$(document).ready(function(){
+// $(document).ready(function(){
 
-	document.getElementById("inp2").addEventListener("change", readFile2);
-})
+// 	document.getElementById("inp2").addEventListener("change", readFile2);
+// })
 
 
 

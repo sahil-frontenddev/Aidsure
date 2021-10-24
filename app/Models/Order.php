@@ -10,13 +10,13 @@ class Order extends Model
     
     use HasFactory;
 
-    protected $fillable = [
-        'r_number',
-        'tablets',
-        'capsules',
-        'syrup',
-        'injection',
-        'sergical',
-        'image',
-    ];
+    // protected $fillable = [
+    //     'r_number',
+    //     'tablets',
+    //     'capsules',
+    //     'syrup',
+    //     'injection',
+    //     'sergical',
+    //     'image',
+    // ];
 }

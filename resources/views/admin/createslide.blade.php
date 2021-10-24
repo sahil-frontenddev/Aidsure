@@ -25,7 +25,7 @@
         
             <div class="col-md-12">
               <div class="form-group col-md-6">
-                <button type="button" class="btn btn-primary createslide">Register</button>
+                <button type="button" class="btn btn-primary createslide">Create Slide</button>
               </div>
             </div>  
           </form>
@@ -50,6 +50,53 @@
       </div>
     </div>
   </div>
+  
+  <script>
+ function readFile() {
+  
+  if (this.files && this.files[0]) {
+    
+    var FR= new FileReader();
+    
+    FR.addEventListener("load", function(e) {
+     
+       $(".attachimage").val(e.target.result)
+
+      var data = $('form').serialize();
+
+		console.log(data);
+
+      $.ajax({
+            url: apiendpoint+'uploadimage',
+            type: "post",
+            headers: {
+                        'Accept': 'application/json',
+                        'Authorization': 'Bearer '+localStorage.getItem('ff_token'),
+            },
+            processData: false,
+            data:data,
+            async:false,
+          }).done(function(res) {
+          	
+          	if(res.status == 'success'){
+          		
+          		$(".attachimage").val(res.image);
+          		
+          	}
+          	
+          })
+
+
+    }); 
+    
+    FR.readAsDataURL( this.files[0] );
+  }
+  
+}
+
+
+document.getElementById("inp").addEventListener("change", readFile);
+  </script>
             <!-- /.row -->
 @endsection            
         

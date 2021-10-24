@@ -30,7 +30,8 @@
                 <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="https://bryanrojasq.wordpress.com">
-                <img src="{{asset('public/assets/img/logo.png')}}" style="width: 170px;" alt="LOGO">
+                <h2>AIDSURE</h2>
+                <!-- <img src="{{asset('public/assets/img/logo.png')}}" style="width: 170px;" alt="LOGO"> -->
             </a>
         </div>
         <!-- Top Menu Items -->
@@ -50,11 +51,14 @@
         <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav side-nav">
+
+                @if(Auth::user()->role == "admin")
+
                 <li>
                     <a href="#" data-toggle="collapse" data-target="#submenu-1"><i class="fa fa-users"></i> Admin Users <i class="fa fa-fw fa-angle-down pull-right"></i></a>
                     <ul id="submenu-1" class="collapse">
                         <li><a href="{{route('admin_users')}}"><i class="fa fa-angle-double-right"></i> All Users</a></li>
-                        <!-- <li><a href="#"><i class="fa fa-angle-double-right"></i> Add New user</a></li> -->
+                        <li><a href="{{route('admin_newuser')}}"><i class="fa fa-angle-double-right"></i> Add New user</a></li>
                     </ul>
                 </li>
                 <li>
@@ -86,6 +90,10 @@
                     <li><a href="{{route('admin_addmedicalstore')}}"><i class="fa fa-angle-double-right"></i> Add New Medical Store</a></li>
                 </ul>
                 </li>
+
+                @endif
+
+                @if(Auth::user()->role == "admin"  || Auth::user()->role == "subadmin")
                 <li>
                     <a href="#" data-toggle="collapse" data-target="#submenu-4"><i class="fa fa-users"></i> Orders <i class="fa fa-fw fa-angle-down pull-right"></i></a>
                  <ul id="submenu-4" class="collapse">
@@ -98,6 +106,8 @@
                     <li><a href="{{route('admin_family')}}"><i class="fa fa-angle-double-right"></i> All Families</a></li>
                 </ul>
                 </li>
+                @endif
+                 @if(Auth::user()->role == "admin")
                 <li>
                     <a href="#" data-toggle="collapse" data-target="#submenu-7"><i class="fa fa-users"></i> Slider <i class="fa fa-fw fa-angle-down pull-right"></i></a>
                  <ul id="submenu-7" class="collapse">
@@ -108,6 +118,7 @@
                 <li>
                     <a href="{{route('admin_gallery')}}">Gallery</a>
                 </li>
+                @endif
             </ul>
         </div>
         <!-- /.navbar-collapse -->
@@ -279,6 +290,11 @@
 }
 .collapse.navbar-collapse.navbar-ex1-collapse, ul.nav.navbar-nav.side-nav {
     background: red;
+}
+a.navbar-brand h2 {
+    color: #fff;
+    margin-top: 10px;
+    font-weight: bold;
 }
 </style>
 <!-- <script type="text/javascript">

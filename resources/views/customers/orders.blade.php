@@ -9,10 +9,7 @@
                     <tr>
                       <th scope="col">#</th>
                       <th scope="col">Center Id</th>
-                      <th scope="col">Tablets</th>
-                      <th scope="col">Capsules</th>
-                      <th scope="col">Syrup</th>
-                      <th scope="col">Injection</th>
+                      <th scope="col">Family Number</th>
                       <th scope="col">Date</th>
                       <th scope="col">Status</th>
                       <th scope="col">Action</th>
@@ -26,19 +23,32 @@
                     <tr>
                       <th scope="row">{{$item->id}}</th>
                       <td>{{$item->center_id}}</td>
-                      <td>{{$item->tablets}}</td>
-                      <td>{{$item->capsules}}</td>
-                      <td>{{$item->syrup}}</td>
-                      <td>{{$item->injection}}</td>
+                      <td>{{$item->family_id}}</td>
                       <td>{{$item->created_at}}</td>
                       <td>{{$item->status}}</td>
-                      <td><a href="{{url('/customer/orderview')}}/{{$item->id}}"><i class="fa fa-eye"></i></a></td>
+                      <td>
+                       @if($item->status == "approve")    
+                          <a href="{{url('/customer/orderview')}}/{{$item->id}}"><i class="fa fa-eye" data-toggle="tooltip" data-placement="top" title="View Order"></i></a>
+                       
+                        <i class="fa fa-trash " data-toggle="tooltip" data-placement="top" title="You can not delete order. Its already approved."></i>
+                       @else
+                        <i class="fa fa-trash deleteorder" data-toggle="tooltip" data-placement="top" title="Delete Order" data-id="{{$item->id}}" data-status="not-approve"></i>
+                       @endif 
+                      </td>
                      
                     </tr>
                     @endforeach
                   </tbody>
                 </table>
             </div>
+
+            <style type="text/css">
+              i.fa.fa-trash.deleteorder {
+                  color: red;
+                  cursor: pointer;
+              }
+            </style>
+
             <!-- /.row -->
 @endsection            
         

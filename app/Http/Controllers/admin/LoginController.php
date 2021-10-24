@@ -30,21 +30,26 @@ class LoginController extends Controller
     }
 
     public function login(Request $request){
-        
-        // $useremail = $request->useremail;
-        // $userpass = $request->userpassword;
+
         $login_credentials=[
             'email'=>$request->useremail,
             'password'=>$request->userpassword,
         ];
+
         if(auth()->attempt($login_credentials)){
             //generate the token for the user
             $user = Auth::user();
-            $user_login_token = $user->createToken('MyApp')->accessToken;
+         if($user->status == 'approve'){
+             $user_login_token = $user->createToken('MyApp')->accessToken;
             return (new Response(['status'=>'success','token'=>$user_login_token], '200'));
+         }
+         else{
+            return (new Response(['status'=>'error','msg'=>'Wrong Credentials!'], '200'));
+         }
+           
            } 
            else{
-            return (new Response(['status'=>'error','msg'=>'Wrong Credentials!'], '200'));
+        return (new Response(['status'=>'error','msg'=>'Wrong Credentials!'], '200'));
         }
        
        

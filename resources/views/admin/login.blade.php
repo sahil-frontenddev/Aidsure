@@ -23,6 +23,9 @@
               
               
             </div> 
+            <div class="form-group"> 
+                <a href="https://aidsure.live/password/reset">Forgot Password?</a>
+              </div>
            
             <button type="button" class="btn btn-primary adminlogin">Login</button>
           </form>
